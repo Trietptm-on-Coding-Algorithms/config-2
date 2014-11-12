@@ -305,6 +305,7 @@ rbenv rehash
 
 gem install bundler
 gem install gist
+gem install git-up
 
 rbenv rehash
 
