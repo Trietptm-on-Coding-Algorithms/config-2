@@ -355,12 +355,6 @@ sudo chsh -s $(which zsh) $(whoami)
 rm -rf *.gz *.zip *.msi *.deb
 
 #
-# Ubuntu on EC2 doesn't set a password, then complains about
-# lack of a password on login.
-#
-echo $USER:$(openssl rand -hex 128) | sudo chpasswd
-
-#
 # Reboot
 #
 while true; do
