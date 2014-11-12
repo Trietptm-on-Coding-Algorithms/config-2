@@ -51,3 +51,5 @@
     clean = iconv -sc -f $(file -b --mime-encoding %f) -t utf-8
     smudge = iconv -sc -f utf-8 -t $(file -b --mime-encoding %f)
     required
+[git-up "fetch"]
+	all = true
