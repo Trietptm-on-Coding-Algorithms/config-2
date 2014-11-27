@@ -356,6 +356,17 @@ sudo chsh -s $(which zsh) $(whoami)
 rm -rf *.gz *.zip *.msi *.deb
 
 #
+# Change the password if we're in an SSH session
+#
+if [ ! -z "$SSH_CONNECTION" ]; 
+then
+  password=$(openssl rand -base64 24)
+  sudo passwd -u -d $USER
+  python -c "print ('$password'+'\n')*2"  | passwd
+  echo Password is $password
+fi
+
+#
 # Reboot
 #
 while true; do
