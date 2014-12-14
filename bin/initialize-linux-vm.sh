@@ -299,8 +299,8 @@ cd ~
 git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 git clone git://github.com/jamis/rbenv-gemset.git     ~/.rbenv/plugins/rbenv-gemset
 PATH="$PATH:$PWD/.rbenv/shims:$PWD/.rbenv/bin"
-rbenv install        1.9.3-p484
-rbenv gemset  create 1.9.3-p484 gems
+rbenv install        2.1.5
+rbenv gemset  create 2.1.5 gems
 rbenv rehash
 
 gem install bundler
