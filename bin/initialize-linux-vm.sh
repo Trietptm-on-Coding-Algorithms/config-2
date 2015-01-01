@@ -309,6 +309,14 @@ pip install -r requirements.txt
 cd ~
 
 #
+# Pwntools binary requirements
+#
+sudo add-apt-repository ppa:pwntools/binutils -qy
+sudo apt-get update -qy
+sudo apt-get install binutils-{aarch64,alpha,arm,avr,cris,hppa,i386,ia64,m68k,msp430,powerpc{,64},sparc{,64},vax,xscale}-linux-gnu
+
+
+#
 # Ruby things
 #
 git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
