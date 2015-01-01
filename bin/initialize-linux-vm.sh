@@ -233,7 +233,16 @@ PermitEmptyPasswords            no
 KerberosAuthentication          no
 GSSAPIAuthentication            no
 ChallengeResponseAuthentication no
+HostbasedAuthentication         no
+
 X11Forwarding                   yes
+PermitTunnel                    no
+AllowTcpForwarding              yes
+
+UsePrivilegeSeparation          sandbox
+UseDNS                          no
+StrictModes                     yes
+Compression                     delayed
 
 Subsystem      sftp             /usr/lib/openssh/sftp-server
 EOF"
@@ -381,7 +390,7 @@ rm -rf *.gz *.zip *.msi *.deb
 #
 # Change the password if we're in an SSH session
 #
-if [ ! -z "$SSH_CONNECTION" ]; 
+if [ ! -z "$SSH_CONNECTION" ];
 then
   password=$(openssl rand -base64 24)
   sudo passwd -u -d $USER
