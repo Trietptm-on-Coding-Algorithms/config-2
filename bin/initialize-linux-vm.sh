@@ -277,15 +277,20 @@ pyenv global  2.7.8
 #
 # Python things
 #
+pip_force_install() {
+    pip install --upgrade --allow-all-external --allow-unverified $* $*
+}
 pip_install() {
-    pip install --allow-all-external --allow-unverified $* $*
+    pip install --upgrade $*
 }
 pip_install pygments
 pip_install pexpect
-pip_install hg+http://hg.secdev.org/scapy || true # scapy apt-gis down
+pip_force_install hg+http://hg.secdev.org/scapy || true # scapy is down
 pip_install tldr
 pip_install httpie
 pip_install ipython
+pip_install hub
+pip_install git-up
 
 cd ~/pwntools
 pip install -r requirements.txt
