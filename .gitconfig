@@ -53,3 +53,4 @@
     required
 [git-up "fetch"]
 	all = true
+	prune = true

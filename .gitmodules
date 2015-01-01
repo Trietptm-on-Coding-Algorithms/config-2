@@ -1,6 +1,6 @@
 [submodule "pwntools"]
 	path = pwntools
-	url = git://github.com/zachriggle/pwntools.git
+	url = git://github.com/Gallopsled/pwntools.git
 [submodule ".bash_it"]
 	path = .bash_it
 	url = git://github.com/zachriggle/bash-it.git
