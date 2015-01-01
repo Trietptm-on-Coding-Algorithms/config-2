@@ -165,6 +165,16 @@ apt-get source libc6 # for debugging libc
 
 # GUI install?
 if dpkg -l xorg > /dev/null 2>&1; then
+
+    # Log in automatically on Xubuntu
+    if [[ -f /etc/lightdm/lightdm.conf.d/10-xubuntu.conf ]]; then
+        sudo tee /etc/lightdm/lightdm.conf.d/10-xubuntu.conf <<EOF
+[SeatDefaults]
+user-session=xubuntu
+autologin-user=$USER
+EOF
+    fi
+
     sudo add-apt-repository ppa:ubuntu-wine/ppa -y
     sudo apt-get update -qq
 
