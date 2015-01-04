@@ -315,6 +315,7 @@ cd ~/pwntools
 pip install -r requirements.txt
 cd ~/pwntools/docs
 pip install -r requirements.txt
+pip install -e .
 cd ~
 
 #
