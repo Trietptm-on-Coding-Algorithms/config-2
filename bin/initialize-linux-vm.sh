@@ -311,11 +311,9 @@ pip_install ipython
 pip_install hub
 pip_install git-up
 
+git clone https://github.com/Gallopsled/pwntools
 cd ~/pwntools
-pip install -r requirements.txt
-cd ~/pwntools/docs
-pip install -r requirements.txt
-pip install -e .
+bash .travis_install.sh
 cd ~
 
 #
