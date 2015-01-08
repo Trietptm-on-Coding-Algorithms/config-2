@@ -41,6 +41,7 @@ c.InteractiveShell.separate_out = ''
 c.InteractiveShell.separate_out2 = ''
 c.PromptManager.justify = False
 c.TerminalIPythonApp.nosep = True
+c.IPythonTerminalApp.display_banner = False
 
 # Enable GUI event loop integration with any of ('glut', 'gtk', 'gtk3', 'none',
 # 'osx', 'pyglet', 'qt', 'qt4', 'tk', 'wx').
