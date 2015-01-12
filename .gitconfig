@@ -1,6 +1,6 @@
 [user]
 	name = Zach Riggle
-	email = zach@riggle.me
+	email = riggle@google.com
 [alias]
 	lg     = log --graph --pretty=format:'%Cred%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%cr)%Creset - %aN' --abbrev-commit --date=relative
 	lga    = log --all --graph --pretty=format:'%Cred%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%cr)%Creset - %aN' --abbrev-commit --date=relative
@@ -50,7 +50,7 @@
 [filter "mixedtext"]
     clean = iconv -sc -f $(file -b --mime-encoding %f) -t utf-8
     smudge = iconv -sc -f utf-8 -t $(file -b --mime-encoding %f)
-    required
+    required = true
 [git-up "fetch"]
 	all = true
 	prune = true
