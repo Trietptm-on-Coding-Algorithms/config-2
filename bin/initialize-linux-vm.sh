@@ -251,6 +251,12 @@ StrictModes                     yes
 Compression                     delayed
 
 Subsystem      sftp             /usr/lib/openssh/sftp-server
+
+AcceptEnv LANG LC_*
+AcceptEnv TZ
+AcceptEnv COLORFGBG
+AcceptEnv WINDOW
+AcceptEnv TMUX
 EOF"
 sudo service ssh restart
 
