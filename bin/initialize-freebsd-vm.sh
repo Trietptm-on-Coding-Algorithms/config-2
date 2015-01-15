@@ -97,7 +97,7 @@ portaudit -Fda
 # Set up git
 cd ~
 git init
-git remote add https://github.com/zachriggle/tools.git
+git remote add origin https://github.com/zachriggle/tools.git
 git pull
 git checkout -f master
 git submodule update --init --recursive
