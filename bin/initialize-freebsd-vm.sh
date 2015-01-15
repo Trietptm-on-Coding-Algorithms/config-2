@@ -52,6 +52,19 @@ ifconfig_em0="DHCP"
 hostname=$(uname -n)_$(uname -m)
 EOF
 
+# Make fetching faster on modern FreeBSD
+pkg install lang/python
+pkg install ports-mgmt/fastest_sites
+fastest_sites > /usr/local/etc/ports_sites.conf
+cat >> /etc/make.conf <<EOF
+.include "/usr/local/etc/ports_sites.conf"
+EOF
+
+# bash requires fdescfs
+cat >> /etc/fstab <<EOF
+fdesc   /dev/fd         fdescfs         rw      0       0
+EOF
+
 # Install things we want
 install compat6x-i386
 install git
