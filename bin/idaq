@@ -1,0 +1,2 @@
+#!/bin/sh
+wine "$HOME/.wine/drive_c/Program Files (x86)/IDA 6.6/idaq.exe" $* 2>/dev/null  &
