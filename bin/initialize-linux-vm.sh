@@ -198,6 +198,12 @@ EOF
     ~/gnome-terminal-colors-solarized-master/set_dark.sh
     rm -rf gnome-terminal-colors-solarized-master
 
+    # Disable the login prompt when the screensaver pops
+    gsettings set org.gnome.desktop.screensaver lock-delay 3600                                                               ⏎
+    gsettings set org.gnome.desktop.screensaver lock-enabled false
+    gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
+
+
     sudo add-apt-repository ppa:ubuntu-wine/ppa -y
     sudo apt-get update -qq
 
