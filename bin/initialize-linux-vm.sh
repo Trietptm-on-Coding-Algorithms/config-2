@@ -55,6 +55,16 @@ sudo sed -i -E "s $slow $fast i" /etc/apt/sources.list
 
 
 #
+# Get around proxy filtering by user-agent
+#
+sudo tee /etc/apt/apt.conf.d/10user-agent <<EOF
+Acquire
+{
+  http::User-Agent "Mozilla/5.0 (Windows NT 5.1; rv:25.0) Gecko/20100101 Firefox/25.0"
+};
+EOF
+
+#
 # Binaries and prerequisites
 #
 sudo apt-get -qq update
@@ -172,14 +182,21 @@ apt-get source libc6 # for debugging libc
 # GUI install?
 if dpkg -l xorg > /dev/null 2>&1; then
 
-    # Log in automatically on Xubuntu
-    if [[ -f /etc/lightdm/lightdm.conf.d/10-xubuntu.conf ]]; then
-        sudo tee /etc/lightdm/lightdm.conf.d/10-xubuntu.conf <<EOF
+
+    # Automatically log in as the current user
+    lightdm=/etc/lightdm/lightdm.conf.d
+    [[ -d $lightdm ]] || sudo mkdir -p $lightdm
+    sudo tee $lightdm/20-autologin.conf <<EOF
 [SeatDefaults]
-user-session=xubuntu
 autologin-user=$USER
 EOF
-    fi
+
+    # Set Solarized colors in Gnome-Terminal, which doesn't
+    # have an actual config file but uses gconf bullshit.
+    wget -nc https://github.com/Anthony25/gnome-terminal-colors-solarized/archive/master.zip
+    unzip master.zip
+    ~/gnome-terminal-colors-solarized-master/set_dark.sh
+    rm -rf gnome-terminal-colors-solarized-master
 
     sudo add-apt-repository ppa:ubuntu-wine/ppa -y
     sudo apt-get update -qq
@@ -214,7 +231,7 @@ fi
 wget -nc http://www.capstone-engine.org/download/2.1.2/capstone-2.1.2_$ARCH.deb
 
 sudo dpkg --install *.deb || true
-sudo apt-get install -f
+sudo apt-get install -f --yes
 
 sudo apt-get -f    --silent install
 sudo apt-get --yes --silent autoremove
@@ -324,12 +341,13 @@ pip_install git-up
 git clone https://github.com/Gallopsled/pwntools
 cd ~/pwntools
 bash .travis_install.sh
+bash .travis_ssh_setup.sh
 cd ~
 
 #
 # Pwntools binary requirements
 #
-sudo add-apt-repository ppa:pwntools/binutils -qy
+sudo add-apt-repository ppa:pwntools/binutils -y
 sudo apt-get update -qy
 sudo apt-get install binutils-{aarch64,alpha,arm,avr,cris,hppa,i386,ia64,m68k,msp430,powerpc{,64},sparc{,64},vax,xscale}-linux-gnu
 
@@ -377,13 +395,7 @@ bundle install
 cd ~
 git clone git://github.com/devttys0/binwalk.git
 cd binwalk
-autoreconf
-./configure
-make deps # dependencies
-echo Y | make
-sudo make install       # uses system python
-python setup.py install # uses pyenv  python
-cd ~
+python setup.py install
 sudo rm -rf binwalk
 
 #
@@ -394,7 +406,7 @@ sudo chsh -s $(which zsh) $(whoami)
 #
 # Clean up
 #
-rm -rf *.gz *.zip *.msi *.deb
+rm -rf *.gz *.zip *.msi *.deb *.xz *.dsc
 
 #
 # Change the password if we're in an SSH session
