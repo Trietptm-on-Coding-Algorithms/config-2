@@ -1,0 +1,5 @@
+#!/bin/sh
+
+sudo tee -a /etc/hosts <<EOF
+127.0.0.1 reddit.com www.reddit.com slashdot.org
+EOF
