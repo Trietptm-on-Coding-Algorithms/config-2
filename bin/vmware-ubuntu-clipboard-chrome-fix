@@ -1,0 +1,7 @@
+#!/bin/sh
+while true; do
+sleep 0.1;
+CB=$(xsel -o -b);
+[[ "$CB" != "$CB2"; ]] && echo $CB | xsel -i -p
+CB2="$CB"
+done
