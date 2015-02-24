@@ -67,14 +67,26 @@ Acquire
 };
 EOF
 
-sudo apt-get -qq update
-sudo DEBIAN_FRONTEND=noninteractive \
-     apt-get -y \
-     -o Dpkg::Options::="--force-confdef" \
-     -o Dpkg::Options::="--force-confold" \
-     dist-upgrade
+#
+# Don't ever prompt me to use the new or old version
+# of a configuration file.
+#
+sudo tee /etc/apt/apt.conf.d/80confold <<EOF
+DPkg::Options {"--force-confold"; };
+DPkg::Options {"--force-confdef"; };
+EOF
+
+#
+# Upgrade the system first
+#
+sudo apt-get -qq -y update
+sudo apt-get -qq -y dist-upgrade
 
 
+#
+# Start installing packages.  We have to
+# Add the debian keyring first.
+#
 install() {
     sudo apt-get install -qq --yes $*
 }
