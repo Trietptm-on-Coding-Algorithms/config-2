@@ -25,7 +25,10 @@ EOF
 fi
 
 if [ ! -f /etc/sudoers.d/$USER ]; then
-sudo bash -c "umask 377; echo '$USER ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers.d/$USER"
+sudo bash <<EOF
+umask 377
+echo "$USER ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/$USER
+EOF
 fi
 
 #
