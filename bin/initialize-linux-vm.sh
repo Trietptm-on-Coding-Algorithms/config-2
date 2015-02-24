@@ -68,7 +68,12 @@ Acquire
 EOF
 
 sudo apt-get -qq update
-sudo apt-get -y -qq dist-upgrade
+sudo DEBIAN_FRONTEND=noninteractive \
+     apt-get -y \
+     -o Dpkg::Options::="--force-confdef" \
+     -o Dpkg::Options::="--force-confold" \
+     dist-upgrade
+
 
 install() {
     sudo apt-get install -qq --yes $*
