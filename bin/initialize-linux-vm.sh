@@ -64,20 +64,6 @@ Acquire
 };
 EOF
 
-#
-# Enable installation of cross-build stuff from debian.
-#
-# We use old versions since it's the only thing that doesn't
-# end up having conflicts with modern Ubuntu.
-#
-sudo tee /etc/apt/sources.list.d/emdebian.list << EOF
-deb http://mirrors.mit.edu/debian squeeze main
-deb http://www.emdebian.org/debian squeeze main
-EOF
-
-#
-# Binaries and prerequisites
-#
 sudo apt-get -qq update
 sudo apt-get -y -qq dist-upgrade
 
@@ -89,6 +75,23 @@ install debian-keyring
 install debian-archive-keyring
 install emdebian-archive-keyring
 
+
+#
+# Enable installation of cross-build stuff from debian.
+#
+# We use old versions since it's the only thing that doesn't
+# end up having conflicts with modern Ubuntu.
+#
+sudo tee /etc/apt/sources.list.d/emdebian.list << EOF
+deb http://mirrors.mit.edu/debian squeeze main
+deb http://www.emdebian.org/debian squeeze main
+EOF
+
+
+#
+# Binaries and prerequisites
+#
+sudo apt-get -qq update
 install ack-grep
 install autoconf
 install binutils
