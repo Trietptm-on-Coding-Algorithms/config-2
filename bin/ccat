@@ -1,7 +1,22 @@
 #!/bin/sh
+CAT=cat
+[ -t 1 ] && CAT='pygmentize -g'
+
+_cat () {
 if [ -t 1 ];
 then
     pygmentize -g $* | less -R
 else
     cat $*
 fi
+}
+
+for file in $*;
+do
+    if file $file | grep ELF >/dev/null 2>&1;
+    then
+        readelf -h $file
+    else
+        _cat $file
+    fi
+done
