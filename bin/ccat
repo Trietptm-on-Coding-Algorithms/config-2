@@ -11,11 +11,23 @@ else
 fi
 }
 
+sizeof() {
+    cat $* | wc -c
+}
+
 for file in $*;
 do
-    if file $file | grep ELF >/dev/null 2>&1;
-    then
+    if [ ! -t 1 ]; then
+        /bin/cat $file
+    elif file $file | grep ELF >/dev/null 2>&1; then
         readelf -h $file
+    elif file $file | grep ": data" >/dev/null 2>&1; then
+        if [ $(sizeof $file) -lt 1000000 && -f $file && hash phd 2>/dev/null ];
+        then
+            phd $file
+        else
+            xxd $file
+        fi
     else
         _cat $file
     fi
