@@ -1,25 +1,16 @@
 #!/bin/sh
-CAT=cat
-[ -t 1 ] && CAT='pygmentize -g'
-
-_cat () {
-if [ -t 1 ];
-then
-    pygmentize -g $* | less -R
-else
-    cat $*
-fi
-}
-
 sizeof() {
-    cat $* | wc -c
+    /bin/cat $* | wc -c
 }
+
+
+if [ ! -t 1 ]; then
+    /bin/cat $*
+else
 
 for file in $*;
 do
-    if [ ! -t 1 ]; then
-        /bin/cat $file
-    elif file $file | grep ELF >/dev/null 2>&1; then
+    if file $file | grep ELF >/dev/null 2>&1; then
         readelf -h $file
     elif file $file | grep ": data" >/dev/null 2>&1; then
         if [ $(sizeof $file) -lt 1000000 && -f $file && hash phd 2>/dev/null ];
@@ -29,6 +20,9 @@ do
             xxd $file
         fi
     else
-        _cat $file
+        pygmentize -g $file
     fi
-done
+    echo
+done | less -R
+
+fi
