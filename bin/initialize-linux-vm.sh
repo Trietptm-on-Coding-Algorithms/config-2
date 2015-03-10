@@ -389,8 +389,8 @@ pip_install ipython
 pip_install hub
 pip_install git-up
 
-git clone https://github.com/Gallopsled/pwntools
-cd ~/pwntools
+git clone https://github.com/binjitsu/binjitsu
+cd ~/binjitsu
 bash .travis_install.sh
 bash .travis_ssh_setup.sh
 cd ~
