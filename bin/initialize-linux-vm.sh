@@ -121,6 +121,7 @@ install cmake
 install curl
 install libc6:i386 || true
 install libc6-dbg:i386 || true
+install linux-libc-dev:i386
 install dissy
 install dpkg-dev
 install emacs
@@ -128,8 +129,8 @@ install expect{,-dev}
 install fortune
 install gcc-aarch64-linux-gnu || true
 install gcc-arm-linux-gnueabihf || true
+install gcc-powerpc-linux-gnu || true
 install --force-yes gcc-4.4-mips-linux-gnu || true
-install --force-yes gcc-4.4-powerpc-linux-gnu || true
 install --force-yes gcc-4.4-s390-linux-gnu || true
 install --force-yes gcc-4.4-sparc-linux-gnu || true
 install gdb
@@ -247,7 +248,7 @@ EOF
     gsettings set org.gnome.desktop.screensaver lock-delay 3600
     gsettings set org.gnome.desktop.screensaver lock-enabled false
     gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
-
+    dconf write /org/compiz/profiles/unity/plugins/unityshell/shortcut-overlay false
 
     sudo add-apt-repository ppa:ubuntu-wine/ppa -y
     sudo apt-get update -qq
