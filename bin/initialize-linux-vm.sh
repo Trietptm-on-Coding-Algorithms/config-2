@@ -95,19 +95,6 @@ install debian-keyring
 install debian-archive-keyring
 install emdebian-archive-keyring
 
-
-#
-# Enable installation of cross-build stuff from debian.
-#
-# We use old versions since it's the only thing that doesn't
-# end up having conflicts with modern Ubuntu.
-#
-sudo tee /etc/apt/sources.list.d/emdebian.list << EOF
-deb http://mirrors.mit.edu/debian squeeze main
-deb http://www.emdebian.org/debian squeeze main
-EOF
-
-
 #
 # Binaries and prerequisites
 #
@@ -130,9 +117,6 @@ install fortune
 install gcc-aarch64-linux-gnu || true
 install gcc-arm-linux-gnueabihf || true
 install gcc-powerpc-linux-gnu || true
-install --force-yes gcc-4.4-mips-linux-gnu || true
-install --force-yes gcc-4.4-s390-linux-gnu || true
-install --force-yes gcc-4.4-sparc-linux-gnu || true
 install gdb
 install gdb-multiarch || true
 install git-core
@@ -185,6 +169,24 @@ install yodl
 install zlib1g-dev
 install zsh
 install unzip
+
+#
+# Enable installation of cross-build stuff from debian.
+#
+# We use old versions since it's the only thing that doesn't
+# end up having conflicts with modern Ubuntu.
+#
+sudo tee /etc/apt/sources.list.d/emdebian.list << EOF
+deb http://mirrors.mit.edu/debian squeeze main
+deb http://www.emdebian.org/debian squeeze main
+EOF
+
+install --force-yes gcc-4.4-mips-linux-gnu || true
+install --force-yes gcc-4.4-s390-linux-gnu || true
+install --force-yes gcc-4.4-sparc-linux-gnu || true
+
+sudo rm -rf /etc/apt/sources.list.d/emdebian.list*
+
 
 #
 # Configure automatic updates
