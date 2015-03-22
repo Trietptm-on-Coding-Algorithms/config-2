@@ -403,7 +403,7 @@ cd ~
 #
 sudo add-apt-repository ppa:pwntools/binutils -y
 sudo apt-get update -qy
-sudo apt-get install binutils-{aarch64,alpha,arm,avr,cris,hppa,i386,ia64,m68k,msp430,powerpc{,64},sparc{,64},vax,xscale}-linux-gnu
+sudo apt-get install -qy binutils-{aarch64,alpha,arm,avr,cris,hppa,i386,ia64,m68k,msp430,powerpc{,64},sparc{,64},vax,xscale}-linux-gnu
 
 
 #
