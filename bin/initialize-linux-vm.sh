@@ -278,7 +278,7 @@ EOF
     gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Droid Sans 10'
 
     wget -nc https://www.rescuetime.com/installers/rescuetime_current_$ARCH.deb
-    wget -nc http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3065_$ARCH.deb
+    wget -nc http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3080_$ARCH.deb
     wget -nc https://dl.google.com/linux/direct/google-chrome-stable_current_$ARCH.deb
 fi
 
