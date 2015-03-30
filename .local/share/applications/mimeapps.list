@@ -1,4 +1,13 @@
 [Added Associations]
 x-scheme-handler/http=exo-web-browser.desktop
 x-scheme-handler/https=exo-web-browser.desktop
+application/x-sharedlib=sublime_text.desktop;
 
+[Default Applications]
+text/html=google-chrome.desktop
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
+x-scheme-handler/about=google-chrome.desktop
+x-scheme-handler/unknown=google-chrome.desktop
+x-scheme-handler/ircs=google-chrome.desktop
+x-scheme-handler/irc=google-chrome.desktop
