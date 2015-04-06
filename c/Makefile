@@ -43,6 +43,10 @@ $(OUT): $(OBJ_FILES)
 	@echo Compiling $@ from [ $< ]
 	$(CC) $(CFLAGS) -c $< -o $@
 
+.cc.o:
+	@echo Compiling $@ from [ $< ]
+	$(CXX) $(CFLAGS) -c $< -o $@
+
 .cpp.o:
 	@echo Compiling $@ from [ $< ]
 	$(CXX) $(CFLAGS) -c $< -o $@
