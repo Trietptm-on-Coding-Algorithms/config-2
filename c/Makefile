@@ -1,7 +1,7 @@
 
 # -- Compilers --
-CC  ?= gcc
-CXX ?= g++
+CC  = clang
+CXX = clang++
 
 # -- Output files --
 OUT ?= a.out
@@ -31,8 +31,6 @@ all: $(OUT)
 # Output file
 # =========================================================
 $(OUT): $(OBJ_FILES)
-	@echo $C_FILES
-	@echo $CPP_FILES
 	@echo Building binary $@ from [ $^ ]
 	$(CXX) $(LDFLAGS) $^ -o $@
 
