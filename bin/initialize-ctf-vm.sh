@@ -49,7 +49,7 @@ kernel.randomize_va_space = 2
 kernel.yama.ptrace_scope = 1
 net.ipv4.tcp_syncookies = 1
 net.ipv6.conf.all.disable_ipv6 = 1
-kernel.core_pattern=core
+kernel.core_pattern = core
 EOF
 sysctl --system
 
