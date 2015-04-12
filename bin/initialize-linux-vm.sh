@@ -194,7 +194,7 @@ install --force-yes gcc-4.4-sparc-linux-gnu || true
 install --force-yes g++-4.4-sparc-linux-gnu || true
 
 sudo rm -rf /etc/apt/sources.list.d/emdebian.list*
-
+sudo apt-get update
 
 #
 # Configure automatic updates
