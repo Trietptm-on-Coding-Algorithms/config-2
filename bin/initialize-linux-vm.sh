@@ -115,8 +115,11 @@ install emacs
 install expect{,-dev}
 install fortune
 install gcc-aarch64-linux-gnu || true
+install g++-aarch64-linux-gnu || true
 install gcc-arm-linux-gnueabihf || true
+install g++-arm-linux-gnueabihf || true
 install gcc-powerpc-linux-gnu || true
+install g++-powerpc-linux-gnu || true
 install gdb
 install gdb-multiarch || true
 install git-core
@@ -181,9 +184,14 @@ deb http://mirrors.mit.edu/debian squeeze main
 deb http://www.emdebian.org/debian squeeze main
 EOF
 
+sudo apt-get update
+
 install --force-yes gcc-4.4-mips-linux-gnu || true
+install --force-yes g++-4.4-mips-linux-gnu || true
 install --force-yes gcc-4.4-s390-linux-gnu || true
+install --force-yes g++-4.4-s390-linux-gnu || true
 install --force-yes gcc-4.4-sparc-linux-gnu || true
+install --force-yes g++-4.4-sparc-linux-gnu || true
 
 sudo rm -rf /etc/apt/sources.list.d/emdebian.list*
 
