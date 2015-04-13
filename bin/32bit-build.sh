@@ -1,4 +1,4 @@
-
+#!/bin/sh
 [ -z "$CC" ] || export CC="$CC -m32"
 [ -z "$CXX" ] || export CC="$CXX -m32"
 export CFLAGS=-m32
