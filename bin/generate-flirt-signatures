@@ -1,0 +1,24 @@
+#!/bin/sh
+
+for arch in i386 x86_64; # arm mips powerpc sparc;
+do
+    for tag in $(git tag -l | tail -n1); do
+        # git reset --hard
+        # git clean -xdf
+        git checkout -f $tag
+
+        make distclean
+        make ARCH=$arch defconfig
+        make all -j
+
+        pelf ./lib/libc.a libc.pat
+        NAME=uClibc-v$tag
+        sigmake -n$NAME libc.pat libc.sig || true
+        if [ -f libc.exc ]; then
+            sed -Ei 's|^;.*||' libc.exc
+            sigmake -n$NAME libc.pat libc.sig
+        fi
+
+        cp libc.sig ./uClibc-$arch-$tag.sig
+    done
+done
