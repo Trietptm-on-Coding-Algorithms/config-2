@@ -19,6 +19,6 @@ do
             sigmake -n$NAME libc.pat libc.sig
         fi
 
-        cp libc.sig ./uClibc-$arch-$tag.sig
+        mv libc.sig ./uClibc-$arch-$tag.sig
     done
 done
