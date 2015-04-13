@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=slack4Linux
+Icon=slack4linux.png
+Path=/usr/local/google/home/riggle
+Exec=/usr/local/lib/node_modules/slack-for-linux/./webkitbuilds/slack4linux/linux64/slack4linux
+StartupNotify=false
+OnlyShowIn=Unity;
+X-UnityGenerated=true

@@ -1,0 +1,14 @@
+{
+   "app": {
+      "launch": {
+         "web_url": "https://samuraictf.slack.com/messages/ctf/details/"
+      }
+   },
+   "description": "",
+   "icons": {
+      "16": "icons/16.png"
+   },
+   "key": "JVVlvPgvfo4EBKvHIxQhaDM5jfEovWxJ6mnjOPVg2Xw=",
+   "name": "https://samuraictf.slack.com/messages/ctf/det",
+   "version": "2015.4.8.62819"
+}
