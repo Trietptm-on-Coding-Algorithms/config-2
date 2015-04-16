@@ -391,7 +391,7 @@ pip_install() {
 }
 pip_install pygments
 pip_install pexpect
-pip_force_install hg+http://hg.secdev.org/scapy || true # scapy is down
+pip_install scapy
 pip_install tldr
 pip_install httpie
 pip_install ipython
