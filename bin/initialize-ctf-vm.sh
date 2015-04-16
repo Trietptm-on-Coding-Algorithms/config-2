@@ -40,7 +40,7 @@ EOF
 
 
 # Have to leave symlink stuff on for challenges.
-cat > /etc/sysctl.conf << EOF
+cat > /etc/sysctl.d/99-ctf.conf << EOF
 # fs.protected_hardlinks = 1
 # fs.protected_symlinks = 1
 kernel.kptr_restrict = 1
