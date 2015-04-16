@@ -155,6 +155,7 @@ install openssh-blacklist-extra
 install openssh-server
 install openvpn
 install patch
+install pwgen
 install qemu-system*  || true
 install rar || true
 install realpath
@@ -473,9 +474,9 @@ rm -rf *.gz *.zip *.msi *.deb *.xz *.dsc
 #
 if [ ! -z "$SSH_CONNECTION" ];
 then
-  password=$(openssl rand -base64 24)
+  password=$(pwgen -s 64 1)
   sudo passwd -u -d $USER
-  python -c "print ('$password'+'\n')*2"  | passwd
+  (echo $password; echo $passwd) | passwd
   echo Password is $password
 fi
 
@@ -490,17 +491,3 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
-
-# #
-# # Fix hostname so that it looks like...
-# #
-# #    ubuntu-12.10-quantal-i686
-# #
-# distro="$(lsb_release -si)"
-# codename="$(lsb_release -sc)"
-# version="$(lsb_release -sr)"
-# arch="$(uname -m)"
-# hostname="$distro-$version-$codename-$arch"
-# hostname=${hostname,,}
-# hostname="$(echo $hostname | sed 's|\.|-|')"
-# sudo bash -c "echo $hostname > /etc/hostname"
