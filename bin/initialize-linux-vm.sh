@@ -285,12 +285,10 @@ EOF
     gsettings set org.gnome.desktop.wm.preferences theme 'Greybird'
     gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Droid Sans 10'
 
-    wget -nc https://www.rescuetime.com/installers/rescuetime_current_$ARCH.deb
-    wget -nc http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3080_$ARCH.deb
+    # wget -nc https://www.rescuetime.com/installers/rescuetime_current_$ARCH.deb
+    wget -nc http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_$ARCH.deb
     wget -nc https://dl.google.com/linux/direct/google-chrome-stable_current_$ARCH.deb
 fi
-
-wget -nc http://www.capstone-engine.org/download/2.1.2/capstone-2.1.2_$ARCH.deb
 
 sudo dpkg --install *.deb || true
 sudo apt-get install -f --yes
