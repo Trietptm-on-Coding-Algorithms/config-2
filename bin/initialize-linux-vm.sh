@@ -227,6 +227,11 @@ sudo tee /etc/sysctl.d/10-so_reuseaddr.conf <<EOF
 net.ipv4.tcp_tw_reuse = 1
 net.ipv4.tcp_tw_recycle = 1
 EOF
+
+sudo tee /etc/sysctl.d/10-core_pattern.conf <<EOF
+kernel.core_pattern = core
+EOF
+
 sudo sysctl --system
 
 #
