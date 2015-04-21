@@ -264,6 +264,7 @@ EOF
     gsettings set org.gnome.desktop.screensaver lock-delay 3600
     gsettings set org.gnome.desktop.screensaver lock-enabled false
     gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
+    gsettings set org.gnome.Terminal.Legacy.Settings confirm-close false
     dconf write /org/compiz/profiles/unity/plugins/unityshell/shortcut-overlay false
 
     sudo add-apt-repository ppa:ubuntu-wine/ppa -y
