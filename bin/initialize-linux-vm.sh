@@ -197,6 +197,39 @@ install --force-yes g++-4.4-sparc-linux-gnu || true
 sudo rm -rf /etc/apt/sources.list.d/emdebian.list*
 sudo apt-get update
 
+sudo apt-get remove -yf apport
+
+#
+# Configure CC and CXX to be Clang by default.
+#
+# Also, configure 'clang' to even exist in the system path, as by
+# default it won't (as only e.g. clang-3.5 exists).
+#
+for version in 3.4 3.5 3.6;
+do
+    if hash clang-$version 2>/dev/null;
+    then
+        sudo update-alternatives --install $(which c++) c++ $(which clang++-$version) 30
+        sudo update-alternatives --install $(which g++) g++ $(which clang++-$version) 30
+
+        sudo update-alternatives --install $(which cc)  cc  $(which clang-$version)   30
+        sudo update-alternatives --install $(which gcc) gcc $(which clang-$version)   30
+    fi
+done
+
+for version in 4.7 4.8 4.9;
+do
+    if hash gcc-$version 2>/dev/null;
+    then
+        sudo update-alternatives --install $(which c++) c++ $(which g++-$version) 20
+        sudo update-alternatives --install $(which g++) g++ $(which g++-$version) 20
+
+        sudo update-alternatives --install $(which cc)  cc  $(which gcc-$version)   20
+        sudo update-alternatives --install $(which gcc) gcc $(which gcc-$version)   20
+    fi
+done
+
+
 #
 # Configure automatic updates
 #
@@ -226,10 +259,6 @@ EOF
 sudo tee /etc/sysctl.d/10-so_reuseaddr.conf <<EOF
 net.ipv4.tcp_tw_reuse = 1
 net.ipv4.tcp_tw_recycle = 1
-EOF
-
-sudo tee /etc/sysctl.d/10-core_pattern.conf <<EOF
-kernel.core_pattern = core
 EOF
 
 sudo sysctl --system
