@@ -197,6 +197,8 @@ install --force-yes g++-4.4-sparc-linux-gnu || true
 sudo rm -rf /etc/apt/sources.list.d/emdebian.list*
 sudo apt-get update
 
+sudo apt-get remove -yf apport
+
 #
 # Configure CC and CXX to be Clang by default.
 #
@@ -260,10 +262,6 @@ EOF
 sudo tee /etc/sysctl.d/10-so_reuseaddr.conf <<EOF
 net.ipv4.tcp_tw_reuse = 1
 net.ipv4.tcp_tw_recycle = 1
-EOF
-
-sudo tee /etc/sysctl.d/10-core_pattern.conf <<EOF
-kernel.core_pattern = core
 EOF
 
 sudo sysctl --system

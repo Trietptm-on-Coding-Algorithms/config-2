@@ -13,8 +13,10 @@ do
 
         pelf ./lib/libc.a libc.pat
         NAME=uClibc-v$tag
+        rm -f libc.exc
         sigmake -n$NAME libc.pat libc.sig || true
         if [ -f libc.exc ]; then
+            rm -f libc.sig
             sed -Ei 's|^;.*||' libc.exc
             sigmake -n$NAME libc.pat libc.sig
         fi
