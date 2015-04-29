@@ -212,6 +212,9 @@ do
 
         sudo update-alternatives --install $(which cc)  cc  $(which clang-$version)   30
         sudo update-alternatives --install $(which gcc) gcc $(which clang-$version)   30
+
+        sudo update-alternatives --install /usr/bin/clang++ clang++ $(which clang++-$version) 30
+        sudo update-alternatives --install /usr/bin/clang   clang   $(which clang-$version)   30
     fi
 done
 
