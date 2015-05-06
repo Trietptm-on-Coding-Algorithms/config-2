@@ -1,0 +1,5 @@
+export CC=clang
+export CXX=clang++
+export CFLAGS='-D_FORTIFY_SOURCE -g -O2 -pie -fPIC -fstack-protector-strong'
+export CXXFLAGS="$CFLAGS"
+export LDFLAGS="-z noexecstack -z now"
