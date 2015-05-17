@@ -5,3 +5,6 @@ set bell-style visible
 set meta-flag on
 set output-meta on
 set convert-meta off
+
+"\eOC": forward-word
+"\eOD": backward-word
