@@ -13,9 +13,11 @@ LDFLAGS = -L.
 
 # -- Flags --
 ifdef DEBUG
-	CFLAGS		+= -ggdb -O0 -DDEBUG=1
-	LDFLAGS		+= -ggdb -O0 -DDEBUG=1
+	CFLAGS		+= -g -O0 -DDEBUG=1
+	LDFLAGS		+= -g -O0 -DDEBUG=1
 endif
+CFLAGS      += -fsanitize=address
+LDFLAGS     += -fsanitize=address
 CFLAGS 		+= $(INCLUDES)
 
 # -- Input Files --
