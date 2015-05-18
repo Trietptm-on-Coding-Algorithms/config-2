@@ -22,3 +22,6 @@
 [submodule "private"]
 	path = private
 	url = git@github.com:zachriggle/private.git
+[submodule "pwndbg"]
+	path = pwndbg
+	url = https://github.com/zachriggle/pwndbg.git
