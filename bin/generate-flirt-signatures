@@ -1,26 +1,29 @@
-#!/bin/sh
+#!/bin/bash
+set -e
 
-for arch in i386 x86_64; # arm mips powerpc sparc;
-do
-    for tag in $(git tag -l | tail -n1); do
-        # git reset --hard
-        # git clean -xdf
-        git checkout -f $tag
+if [ $# == 0 ];
+then
+    echo "Usage: $0 path-to-lib.a <name>"
+else
 
-        make distclean
-        make ARCH=$arch defconfig
-        make all -j
+filename=$(basename "$1")
+extension="${filename##*.}"
+filename="${filename%.*}"
+filepath="$(dirname $1)/$filename"
 
-        pelf ./lib/libc.a libc.pat
-        NAME=uClibc-v$tag
-        rm -f libc.exc
-        sigmake -n$NAME libc.pat libc.sig || true
-        if [ -f libc.exc ]; then
-            rm -f libc.sig
-            sed -Ei 's|^;.*||' libc.exc
-            sigmake -n$NAME libc.pat libc.sig
-        fi
+name=$2
 
-        mv libc.sig ./uClibc-$arch-$tag.sig
-    done
-done
+if [[ "$name" == "" ]];
+then
+    name=$(basename $1)
+fi
+
+pelf "$filepath.a" "$filepath.pat"
+rm -f "$filepath.exc"
+sigmake -s -n"$name" "$filepath.pat" "$filepath.sig" || true
+if [ -f "$filepath.exc" ]; then
+    rm -f "$filepath.sig"
+    sed -Ei 's|^;.*||' "$filepath.exc"
+    sigmake -s -n"$name" "$filepath.pat" "$filepath.sig"
+fi
+fi
