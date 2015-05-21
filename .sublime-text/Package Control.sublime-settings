@@ -1,16 +1,21 @@
 {
 	"git_binary": "C:\\git\\bin\\git.exe",
+	"in_process_packages":
+	[
+	],
 	"installed_packages":
 	[
 		"AlignTab",
+		"DocBlockr",
+		"GitGutter",
 		"Jade",
 		"JavaScript Refactor",
 		"Jedi - Python autocompletion",
 		"MarkdownEditing",
 		"Package Control",
 		"Package Syncing",
+		"Paste as Column",
 		"SFTP",
-		"SublimeCodeIntel",
 		"SublimeLinter",
 		"Table Cleaner",
 		"Theme - Afterglow",

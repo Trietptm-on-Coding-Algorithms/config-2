@@ -9,12 +9,12 @@
 	"color_scheme": "Packages/User/Solarized (Dark) (SL).tmTheme",
 	"default_encoding": "UTF-8",
 	"font_face": "Source Code Pro",
-	"font_size": 11,
+	"font_size": 10,
 	"ignored_packages":
 	[
+		"Markdown",
 		"Stylus",
-		"Vintage",
-		"Markdown"
+		"Vintage"
 	],
 	"theme": "Soda Dark 3.sublime-theme",
 	"translate_tabs_to_spaces": true,
