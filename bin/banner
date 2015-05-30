@@ -5,6 +5,7 @@ import string, sys, argparse
 p = argparse.ArgumentParser()
 
 p.add_argument('-s','--style')
+p.add_argument('-p','--python',action='store_true')
 p.add_argument('words', nargs='+')
 
 args = p.parse_args()
@@ -17,12 +18,14 @@ print args
 args.words.insert(0, '')
 args.words.append('')
 
+prefix = '#' if args.python else '//'
+line   = '=' if args.python else '*'
 phrase = ' '.join(args.words).upper()
 
-print "//" + 78*'*'
-print "//{: ^78s}".format(phrase)
-print "//" + 78*'*'
+print prefix + 78*line
+print prefix + "{: ^78s}".format(phrase)
+print prefix +  78*line
 print
-print "//{:-^78s}".format(phrase)
+print prefix + "{:-^78s}".format(phrase)
 print
-print "// -----" + phrase + "-----"
+print prefix + " -----" + phrase + "-----"
