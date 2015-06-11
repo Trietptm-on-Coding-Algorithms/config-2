@@ -10,17 +10,17 @@ else
 
 for file in $*;
 do
-    if file $file | grep ELF >/dev/null 2>&1; then
-        readelf -h $file
-    elif file $file | grep ": data" >/dev/null 2>&1; then
-        if [ $(sizeof $file) -lt 1000000 ] && [ -f $file ] && [ hash phd 2>/dev/null ];
+    if file "$file" | grep ELF >/dev/null 2>&1; then
+        readelf -h "$file"
+    elif file "$file" | grep ": data" >/dev/null 2>&1; then
+        if [ $(sizeof "$file") -lt 1000000 ] && [ -f "$file" ] && [ hash phd 2>/dev/null ];
         then
-            phd $file
+            phd "$file"
         else
-            xxd $file
+            xxd "$file"
         fi
     else
-        pygmentize -g $file
+        pygmentize -g "$file"
     fi
     echo
 done | less -R
