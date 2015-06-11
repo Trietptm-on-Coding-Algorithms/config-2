@@ -8,14 +8,17 @@
 	],
 	"color_scheme": "Packages/User/Solarized (Dark) (SL).tmTheme",
 	"default_encoding": "UTF-8",
+	"ensure_newline_at_eof_on_save": true,
 	"font_face": "Source Code Pro",
-	"font_size": 11,
+	"font_size": 10,
 	"ignored_packages":
 	[
-		"Stylus",
 		"Vintage",
-		"Markdown"
+		"Stylus",
+		"Markdown",
+		"Theme - Afterglow"
 	],
+	"scroll_speed": 0.0,
 	"theme": "Soda Dark 3.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true

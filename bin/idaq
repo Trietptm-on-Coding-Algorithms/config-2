@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 exec &>/dev/null
+shopt -s nullglob
 
 NAME=$(basename $0)
 

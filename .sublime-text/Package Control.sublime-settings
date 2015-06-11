@@ -1,5 +1,9 @@
 {
 	"git_binary": "C:\\git\\bin\\git.exe",
+	"in_process_packages":
+	[
+		"Theme - Afterglow"
+	],
 	"installed_packages":
 	[
 		"AlignTab",
@@ -9,8 +13,8 @@
 		"MarkdownEditing",
 		"Package Control",
 		"Package Syncing",
+		"Paste as Column",
 		"SFTP",
-		"SublimeCodeIntel",
 		"SublimeLinter",
 		"Table Cleaner",
 		"Theme - Afterglow",
