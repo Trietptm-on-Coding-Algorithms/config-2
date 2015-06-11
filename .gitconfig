@@ -54,3 +54,15 @@
 [git-up "fetch"]
 	all = true
 	prune = true
+[url "persistent-https://android.git.corp.google.com"]
+        insteadof = https://android.googlesource.com
+[url "persistent-https://android-review.git.corp.google.com"]
+        insteadof = https://android-review.googlesource.com
+[url "persistent-https://googleplex-android.git.corp.google.com"]
+        insteadof = https://googleplex-android.googlesource.com
+[url "persistent-https://googleplex-android-review.git.corp.google.com"]
+        insteadof = https://googleplex-android-review.googlesource.com
+[url "persistent-https://partner-android.git.corp.google.com"]
+        insteadof = https://partner-android.googlesource.com
+[url "persistent-https://partner-android-review.git.corp.google.com"]
+        insteadof = https://partner-android-review.googlesource.com

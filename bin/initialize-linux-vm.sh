@@ -149,6 +149,8 @@ install mercurial
 install nasm
 install netcat-traditional
 install nmap
+install nodejs
+install npm
 install ntp
 install openssh-blacklist
 install openssh-blacklist-extra
@@ -467,6 +469,12 @@ gem install gist
 gem install git-up
 
 rbenv rehash
+
+#
+# Node things
+#
+sudo npm install -g workit
+sudo npm install -g completion
 
 #
 # Set up metasploit

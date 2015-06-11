@@ -7,6 +7,8 @@
 	"installed_packages":
 	[
 		"AlignTab",
+		"DocBlockr",
+		"GitGutter",
 		"Jade",
 		"JavaScript Refactor",
 		"Jedi - Python autocompletion",

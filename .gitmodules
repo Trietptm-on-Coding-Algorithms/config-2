@@ -16,12 +16,12 @@
 [submodule ".rbenv"]
 	path = .rbenv
 	url = git://github.com/sstephenson/rbenv.git
-[submodule "peda"]
-	path = peda
-	url = https://github.com/zachriggle/peda.git
 [submodule "z3"]
 	path = z3
 	url = https://github.com/zachriggle/z3.git
 [submodule "private"]
 	path = private
 	url = git@github.com:zachriggle/private.git
+[submodule "pwndbg"]
+	path = pwndbg
+	url = https://github.com/zachriggle/pwndbg.git
