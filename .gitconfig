@@ -66,3 +66,10 @@
         insteadof = https://partner-android.googlesource.com
 [url "persistent-https://partner-android-review.git.corp.google.com"]
         insteadof = https://partner-android-review.googlesource.com
+[imap]
+	port = 993
+	usessl = true
+	sslverify = true
+	folder = [Gmail]/Drafts
+	user = riggle@google.com
+	host = imaps://imap.gmail.com
