@@ -11,7 +11,8 @@ noglob \
        -o -name '*.h' \
        -o -name '*.java'\
        -o -name '*.xml' \
-       -o -name '*.aidl' \) \
+       -o -name '*.aidl' \
+    \) \
     -print0 \
 | xargs -0 \
     ag \
