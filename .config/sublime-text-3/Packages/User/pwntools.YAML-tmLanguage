@@ -83,8 +83,8 @@ patterns:
   match: ([\w${}]+[:])
 - comment: Inline Python
   name: pwntools.raw.block.python
-  begin: (^<%\s)
-  end: (^%>)
+  begin: (<%\s)
+  end: (%>)
   beginCaptures:
     '1': {name: 'keyword.control'}
   endCaptures:
@@ -132,14 +132,6 @@ patterns:
   patterns:
     - {include: source.python}
   name: source.doc.python.mako.controlline
-- comment: Mako Single Line
-  begin: ^(#)
-  beginCaptures:
-    '1': {name: 'keyword.control'}
-  end: $
-  name: source.python.mako.line
-  patterns:
-    - {include: comment.block}
 
     #   <key>begin</key>
     #   <string>^(#)</string>
