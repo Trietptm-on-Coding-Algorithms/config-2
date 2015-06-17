@@ -81,6 +81,128 @@ patterns:
 - comment: Label
   name: entity.name.tag
   match: ([\w${}]+[:])
+- comment: Inline Python
+  name: pwntools.raw.block.python
+  begin: (^<%\s)
+  end: (^%>)
+  beginCaptures:
+    '1': {name: 'keyword.control'}
+  endCaptures:
+    '1': {name: 'keyword.control'}
+  patterns:
+    - {include: source.python}
+- comment: Inline Docstring
+  begin: (<%(\S+)>)
+  end: (</%(\2)>)
+  beginCaptures:
+    '1': {name: 'keyword.control'}
+  endCaptures:
+    '1': {name: 'keyword.control'}
+  patterns:
+    - {include: comment.block}
+- comment: Mako Tag
+  name: source.mako.tag
+  begin: (<%\w+\s)
+  end: (/>)
+  beginCaptures:
+    '1': {name: 'keyword.control'}
+  endCaptures:
+    '1': {name: 'keyword.control'}
+  patterns:
+    - {include: comment.block}
+- comment: Mako Substitution
+  name: source.mako.expression
+  begin: (\${)
+  end: (})
+  beginCaptures:
+    '1': {name: 'keyword.control'}
+  endCaptures:
+    '1': {name: 'keyword.control'}
+  patterns:
+    - {include: source.python}
+- comment: Mako Comment
+  match: (^##(.*)$)
+  name: comment.line.mako
+- comment: Mako Directive
+  begin: ^\s*(%)(\s*((endfor)|(endif)|(endwhile)))?
+  end: $
+  beginCaptures:
+    '1': {name: 'keyword.control'}
+    '2': {name: 'keyword.control'}
+  patterns:
+    - {include: source.python}
+  name: source.doc.python.mako.controlline
+- comment: Mako Single Line
+  begin: ^(#)
+  beginCaptures:
+    '1': {name: 'keyword.control'}
+  end: $
+  name: source.python.mako.line
+  patterns:
+    - {include: comment.block}
+
+    #   <key>begin</key>
+    #   <string>^(#)</string>
+    #   <key>beginCaptures</key>
+    #   <dict>
+    #     <key>1</key>
+    #     <dict>
+    #       <key>name</key>
+    #       <string>keyword.control</string>
+    #     </dict>
+    #   </dict>
+    #   <key>end</key>
+    #   <string>$</string>
+    #   <key>name</key>
+    #   <string>source.python.mako.line</string>
+    #   <key>patterns</key>
+    #   <array>
+    #     <dict>
+    #       <key>include</key>
+    #       <string>comment.block</string>
+    #     </dict>
+    #   </array>
+    # </dict>
+
+      # <key>begin</key>
+      # <string>^\s*(%)(\s*((endfor)|(endif)|(endwhile)))?</string>
+      # <key>beginCaptures</key>
+      # <dict>
+      #   <key>1</key>
+      #   <dict>
+      #     <key>name</key>
+      #     <string>keyword.control</string>
+      #   </dict>
+      #   <key>2</key>
+      #   <dict>
+      #     <key>name</key>
+      #     <string>keyword.control</string>
+      #   </dict>
+      # </dict>
+
+
+      # <key>begin</key>
+      # <string>(&lt;%\s)</string>
+      # <key>captures</key>
+      # <dict>
+      #   <key>1</key>
+      #   <dict>
+      #     <key>name</key>
+      #     <string>keyword.control</string>
+      #   </dict>
+      # </dict>
+      # <key>end</key>
+      # <string>(%&gt;)</string>
+      # <key>name</key>
+      # <string>source.mako.substitution</string>
+      # <key>patterns</key>
+      # <array>
+      #   <dict>
+      #     <key>include</key>
+      #     <string>source.python</string>
+      #   </dict>
+      # </array>
+
   # match: "(
   #           (bf(c|i)|(u|s)bfx|(u|s)xta?(h|b)?) |
   #           (v(add|cvt|sub|mov|trn|cmp|div|qdmulh|mrs|mul|ld1|qadd|qshrun|st[1234]|addw|mull|mlal|rshrn|swp|qmovun)|qmovun)(\.([isup]?8|[isupf]?16|[isuf]?32|[isu]?64))* |
