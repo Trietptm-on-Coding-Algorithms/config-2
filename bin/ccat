@@ -1,28 +1,27 @@
 #!/bin/sh
 sizeof() {
-    /bin/cat $* | wc -c
+    /bin/cat "$@" | wc -c
 }
 
-
 if [ ! -t 1 ]; then
-    /bin/cat $*
+    /bin/cat "$@"
 else
 
-for file in $*;
+for file in "$@";
 do
+
     if file "$file" | grep ELF >/dev/null 2>&1; then
-        readelf -h "$file"
+        readelf -h "$file" | less -R
     elif file "$file" | grep ": data" >/dev/null 2>&1; then
         if [ $(sizeof "$file") -lt 1000000 ] && [ -f "$file" ] && [ hash phd 2>/dev/null ];
         then
-            phd "$file"
+            phd "$file" | less -R
         else
-            xxd "$file"
+            xxd "$file" | less -R
         fi
     else
-        pygmentize -g "$file"
+        pygmentize -g "$file" | less -R
     fi
-    echo
-done | less -R
+done
 
 fi
