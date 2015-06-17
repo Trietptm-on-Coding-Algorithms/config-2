@@ -57,21 +57,22 @@ sysctl --system
 # All home directories should be owned by root:$user,
 # and should only be readable by that user.
 cd /home
-for dir in $(ls);
+for dir in *;
 do
-    chown -R root.$dir $dir
-    chmod -R o-rwx     $dir
-    chmod -R g-w       $dir
+    chown -R "root.$dir" "$dir"
+    chmod -R o-rwx       "$dir"
+    chmod -R g-w         "$dir"
 done
 
 # Nothing setuid outside of /home
-for file in $(find /  ! -path /home -type f -perm +6000 2>/dev/null);
+find /  ! -path /home -type f -perm +6000 2>/dev/null | \
+while read file;
 do
-    chmod o-rwx $file
+    chmod o-rwx "$file"
 done
 
 # Except su/sudo
-chmod o+rx $(which su) $(which sudo)
+chmod o+rx "$(which su)" "$(which sudo)"
 
 # Disable 'last'
 chmod o-r /var/*/{btmp,wtmp,utmp}

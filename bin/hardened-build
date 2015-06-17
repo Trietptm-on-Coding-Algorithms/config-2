@@ -1,5 +1,5 @@
 export CC=clang
 export CXX=clang++
-export CFLAGS='-D_FORTIFY_SOURCE -g -O2 -pie -fPIC -fstack-protector-strong'
+export CFLAGS='-D_FORTIFY_SOURCE -g -O2 -pie -fPIC -fstack-protector-strong -fsanitize=signed-integer-overflow,unsigned-integer-overflow -ftrap-function=abort -fsanitize-undefined-trap-on-error -fsanitize=address'
 export CXXFLAGS="$CFLAGS"
-export LDFLAGS="-z noexecstack -z now"
+export LDFLAGS="-z noexecstack -z now -fsanitize=address"

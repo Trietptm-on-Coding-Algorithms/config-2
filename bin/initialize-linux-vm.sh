@@ -24,7 +24,7 @@ EOF
     exit
 fi
 
-if [ ! -f /etc/sudoers.d/$USER ]; then
+if [ ! -f "/etc/sudoers.d/$USER" ]; then
 sudo bash <<EOF
 umask 377
 echo "$USER ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/$USER
@@ -40,8 +40,8 @@ case "$(uname -m)" in
     x86_64) ARCH="amd64" ;;
 esac
 
-DISTRO=$(lsb_release -is)   # 'Ubuntu'
-RELEASE=$(lsb_release -cs)  # 'trusty'
+DISTRO="$(lsb_release -is)"   # 'Ubuntu'
+RELEASE="$(lsb_release -cs)"  # 'trusty'
 
 #
 # Default mirrors are sloooooooow
@@ -143,7 +143,7 @@ install libtool
 install libxml2
 install libxml2-dev
 install libxslt1-dev
-install linux-headers-$(uname -r)
+install "linux-headers-$(uname -r)"
 install llvm-3.5 || install llvm
 install mercurial
 install nasm
@@ -211,14 +211,14 @@ for version in 3.4 3.5 3.6;
 do
     if hash clang-$version 2>/dev/null;
     then
-        sudo update-alternatives --install $(which c++) c++ $(which clang++-$version) 30
-        sudo update-alternatives --install $(which g++) g++ $(which clang++-$version) 30
+        sudo update-alternatives --install "$(which c++)" c++ "$(which clang++-$version)" 30
+        sudo update-alternatives --install "$(which g++)" g++ "$(which clang++-$version)" 30
 
-        sudo update-alternatives --install $(which cc)  cc  $(which clang-$version)   30
-        sudo update-alternatives --install $(which gcc) gcc $(which clang-$version)   30
+        sudo update-alternatives --install "$(which cc)"  cc  "$(which clang-$version)"   30
+        sudo update-alternatives --install "$(which gcc)" gcc "$(which clang-$version)"   30
 
-        sudo update-alternatives --install /usr/bin/clang++ clang++ $(which clang++-$version) 30
-        sudo update-alternatives --install /usr/bin/clang   clang   $(which clang-$version)   30
+        sudo update-alternatives --install /usr/bin/clang++ clang++ "$(which clang++-$version)" 30
+        sudo update-alternatives --install /usr/bin/clang   clang   "$(which clang-$version)"   30
     fi
 done
 
@@ -226,11 +226,11 @@ for version in 4.7 4.8 4.9;
 do
     if hash gcc-$version 2>/dev/null;
     then
-        sudo update-alternatives --install $(which c++) c++ $(which g++-$version) 20
-        sudo update-alternatives --install $(which g++) g++ $(which g++-$version) 20
+        sudo update-alternatives --install "$(which c++)" c++ "$(which g++-$version)" 20
+        sudo update-alternatives --install "$(which g++)" g++ "$(which g++-$version)" 20
 
-        sudo update-alternatives --install $(which cc)  cc  $(which gcc-$version)   20
-        sudo update-alternatives --install $(which gcc) gcc $(which gcc-$version)   20
+        sudo update-alternatives --install "$(which cc)"  cc  "$(which gcc-$version)"   20
+        sudo update-alternatives --install "$(which gcc)" gcc "$(which gcc-$version)"   20
     fi
 done
 
@@ -331,7 +331,7 @@ EOF
     wget -nc https://dl.google.com/linux/direct/google-chrome-stable_current_$ARCH.deb
 fi
 
-sudo dpkg --install *.deb || true
+sudo dpkg --install ./*.deb || true
 sudo apt-get install -f --yes
 
 sudo apt-get -f    --silent install
@@ -418,17 +418,17 @@ eval "$(pyenv init -)"
 #
 # Install a local version of Python.
 #
-pyenv install $(cat .python-version)
+pyenv install "$(cat .python-version)"
 
 
 #
 # Python things
 #
 pip_force_install() {
-    pip install --upgrade --allow-all-external --allow-unverified $* $*
+    pip install --upgrade --allow-all-external --allow-unverified "$@" "$@"
 }
 pip_install() {
-    pip install --upgrade $*
+    pip install --upgrade "$@"
 }
 pip_install pygments
 pip_install pexpect
@@ -514,7 +514,7 @@ sudo chsh -s $(which zsh) $(whoami)
 #
 # Clean up
 #
-rm -rf *.gz *.zip *.msi *.deb *.xz *.dsc
+rm -rf ./*.gz ./*.zip ./*.msi ./*.deb ./*.xz ./*.dsc
 
 #
 # Change the password if we're in an SSH session
@@ -522,9 +522,9 @@ rm -rf *.gz *.zip *.msi *.deb *.xz *.dsc
 if [ ! -z "$SSH_CONNECTION" ];
 then
   password=$(pwgen -s 64 1)
-  sudo passwd -u -d $USER
-  (echo $password; echo $passwd) | passwd
-  echo Password is $password
+  sudo passwd -u -d "$USER"
+  (echo "$password"; echo "$passwd") | passwd
+  echo Password is "$password"
 fi
 
 #
