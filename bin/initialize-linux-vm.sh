@@ -58,13 +58,11 @@ sudo sed -i -E "s $slow $fast i" /etc/apt/sources.list
 
 
 #
-# Get around proxy filtering by user-agent
+# Get around proxy filtering for external repos
 #
-sudo tee /etc/apt/apt.conf.d/10user-agent <<EOF
-Acquire
-{
-  http::User-Agent "Mozilla/5.0 (Windows NT 5.1; rv:25.0) Gecko/20100101 Firefox/25.0"
-};
+sudo tee /etc/apt/apt.conf.d/10-no-proxy <<EOF
+Acquire::http::Proxy::mirrors.mit.edu DIRECT;
+Acquire::http::Proxy::www.emdebian.org DIRECT;
 EOF
 
 #
