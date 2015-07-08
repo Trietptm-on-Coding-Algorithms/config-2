@@ -45,6 +45,7 @@
 	autocrlf = false
 	eof = lf
 	whitespace = blank-at-eol,space-before-tab,blank-at-eof,cr-at-eol
+	excludesfile = /usr/local/google/home/riggle/.gitignore_global
 [diff]
 	tool = vimdiff
 [filter "mixedtext"]
