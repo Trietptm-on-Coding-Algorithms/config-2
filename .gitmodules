@@ -22,3 +22,6 @@
 [submodule "pwndbg"]
 	path = pwndbg
 	url = https://github.com/zachriggle/pwndbg.git
+[submodule "/Users/riggle/.vim/bundle/Vundle.vim"]
+	path = /Users/riggle/.vim/bundle/Vundle.vim
+	url = https://github.com/gmarik/Vundle.vim.git
