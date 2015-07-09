@@ -1,0 +1,6 @@
+*~
+*.unc-backup*
+*.pyc
+*.o
+*.tmp
+npm-debug.log

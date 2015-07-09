@@ -37,6 +37,9 @@ set gfn=Consolas:h9:cANSI
 :set laststatus=2
 
 "backups
+au BufWritePre * let &bex = '-' . strftime("%Y%m%d-%H%M%S") . '.vimbackup'
+set backupdir=~/.vim/tmp,.
+set directory=~/.vim/tmp,.
 set backup
 
 set guioptions-=T  "remove toolbar
