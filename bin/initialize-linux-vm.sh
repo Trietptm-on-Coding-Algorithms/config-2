@@ -356,6 +356,7 @@ KerberosAuthentication          no
 GSSAPIAuthentication            no
 ChallengeResponseAuthentication no
 HostbasedAuthentication         no
+KbdInteractiveAuthentication    no
 
 X11Forwarding                   yes
 PermitTunnel                    no
