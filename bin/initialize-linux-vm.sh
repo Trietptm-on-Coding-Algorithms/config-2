@@ -317,7 +317,7 @@ EOF
     sudo debconf-set-selections <<EOF
 ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true
 EOF
-    install wine1.7 winetricks
+    install wine1.7 winetricks || true
     wget -nc https://www.python.org/ftp/python/2.7.7/python-2.7.7.msi
     wine msiexec /i python-2.7.7.msi /quiet  ALLUSERS=1
 
