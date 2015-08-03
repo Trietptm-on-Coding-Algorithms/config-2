@@ -296,7 +296,7 @@ EOF
     gsettings set org.gnome.desktop.screensaver lock-delay 3600
     gsettings set org.gnome.desktop.screensaver lock-enabled false
     gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
-    gsettings set org.gnome.Terminal.Legacy.Settings confirm-close false
+    gsettings set org.gnome.Terminal.Legacy.Settings confirm-close false || true
     dconf write /org/compiz/profiles/unity/plugins/unityshell/shortcut-overlay false
 
     sudo add-apt-repository ppa:ubuntu-wine/ppa -y
@@ -472,6 +472,7 @@ rbenv rehash
 #
 # Node things
 #
+sudo ln -s $(which nodejs) /usr/bin/node
 sudo npm install -g workit
 sudo npm install -g completion
 
