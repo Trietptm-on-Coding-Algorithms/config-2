@@ -1,11 +1,17 @@
 #!/bin/bash
-
+#******************************************************************************
+#                                   WARNING
+#******************************************************************************
 #
-# Setup script for Ubuntu and Debian VMs.
-# TinyURL: This script is available at:
-# $ wget https://goo.gl/3e2B0
-# $ bash 3e2B0
+#  This script will install my public keys in your ~/.ssh/authorized_keys
+#  This script also grants PASSWORDLESS sudo to the user who runs it.
 #
+#  You may not want this.  If you are not me, you should remove the SSH keys
+#  and sudoers file.
+#
+#  For the sake of convenience, this file is available at config.riggle.me
+#
+#******************************************************************************
 
 #
 # Print commands as they're run, and fail on error.
