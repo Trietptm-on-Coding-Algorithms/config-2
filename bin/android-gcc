@@ -1,0 +1,9 @@
+#!/bin/bash
+
+
+export NDK=$HOME/Downloads/android-ndk-r10e
+export SYSROOT=$NDK/platforms/android-21/arch-arm
+export CC="$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc-4.9 --sysroot=$SYSROOT"
+
+set -ex
+$CC "$@"

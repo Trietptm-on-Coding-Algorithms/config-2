@@ -1,0 +1,2 @@
+#!/bin/sh
+adb shell 'dd if=/dev/zero of=$(getprop ro.frp.pst)'
