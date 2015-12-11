@@ -270,7 +270,7 @@ net.ipv4.tcp_tw_reuse = 1
 net.ipv4.tcp_tw_recycle = 1
 EOF
 
-sudo sysctl --system || service procps start
+sudo sysctl --system || sudo service procps start
 
 #
 # Required for 'nc -e'
