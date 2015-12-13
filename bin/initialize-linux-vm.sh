@@ -140,9 +140,11 @@ install libncursesw5-dev
 install libpcap0.8{,-dev}
 install libpng-dev
 install libpq-dev
+install libpython2.7:i386 || true # IDA python
 install libreadline6-dev
 install libsqlite3-dev
 install libssl-dev
+install libssl0.9.8:i386 || true # IDA python
 install libtool
 install libxml2
 install libxml2-dev
