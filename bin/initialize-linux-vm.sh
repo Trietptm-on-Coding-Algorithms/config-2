@@ -140,9 +140,11 @@ install libncursesw5-dev
 install libpcap0.8{,-dev}
 install libpng-dev
 install libpq-dev
+install libpython2.7:i386 || true # IDA python
 install libreadline6-dev
 install libsqlite3-dev
 install libssl-dev
+install libssl0.9.8:i386 || true # IDA python
 install libtool
 install libxml2
 install libxml2-dev
@@ -270,7 +272,7 @@ net.ipv4.tcp_tw_reuse = 1
 net.ipv4.tcp_tw_recycle = 1
 EOF
 
-sudo sysctl --system
+sudo sysctl --system || sudo service procps start
 
 #
 # Required for 'nc -e'
@@ -323,7 +325,8 @@ EOF
     sudo debconf-set-selections <<EOF
 ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true
 EOF
-    install wine1.7 winetricks || true
+    install wine1.7
+    install winetricks || true
     wget -nc https://www.python.org/ftp/python/2.7.7/python-2.7.7.msi
     wine msiexec /i python-2.7.7.msi /quiet  ALLUSERS=1
 

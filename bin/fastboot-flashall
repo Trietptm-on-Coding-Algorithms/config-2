@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -ex
+
+ZIP=$1
+
+if [[ "$ZIP" == "" ]]; then
+  echo "Usage: $(basename $0) zipfile"
+  exit
+fi
+
+T=$(mktemp -d)
+cd $T
+
+if [[ "$ZIP" == http* ]]; then
+  URL="$ZIP"
+  ZIP=~/Downloads/$(basename $ZIP)
+
+  gosso -url $URL > $ZIP
+fi
+
+unzip $ZIP
+
+for IMG in *.img; do
+  PARTITION="${IMG%.*}"
+  fastboot flash $PARTITION $IMG
+done
+
+rm -rf $T
+
+fastboot reboot
+

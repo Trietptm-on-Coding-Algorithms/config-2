@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+ADB_DEVICES=$(adb devices 2>/dev/null | grep -Evi '(daemon|list|kill| )' | cut -f 1)
+echo $ADB_DEVICES
+ARGC="$#"
+
+function banner() {
+  local build=$(adb shell getprop ro.build.id | sed -E 's/[\r\n]//')
+  local dev=$(adb shell getprop ro.build.product | sed -E 's/[\r\n]//')
+  local serial=${ANDROID_SERIAL:0:8}
+  echo --- $dev:$build:$serial ---
+}
+
+if [[ "$ARGC" == "0" ]]; then
+    while read line;
+    do
+        echo $line
+        for device in $ADB_DEVICES;
+        do
+            export ANDROID_SERIAL="$device"
+            banner
+            eval $line
+            echo
+        done
+    done
+# elif [[ "$ARGC" == "1" ]] && [[ -f "$1" ]]; then
+#     for device in $ADB_DEVICES;
+#     do
+#         export ANDROID_SERIAL="$device"
+#         banner
+#         $1
+#         echo
+#     done
+else
+    for device in $ADB_DEVICES;
+    do
+        export ANDROID_SERIAL="$device"
+        banner
+        $*
+        echo
+    done
+fi

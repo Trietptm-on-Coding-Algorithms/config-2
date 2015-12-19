@@ -1,0 +1,15 @@
+#!/bin/sh
+
+FILE=$1
+
+if [ "$FILE" == "" ]; then
+  FILE=$(mktemp).png
+fi
+
+echo "Writing screenshot to $FILE"
+adb shell screencap -p | sed 's/\r$//' > $FILE
+
+
+if [ "$1" == "" ]; then
+xdg-open $FILE
+fi
