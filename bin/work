@@ -10,8 +10,9 @@ cat <<EOF |
 127.0.0.1 pwnable.kr www.pwnable.kr io.smashthestack.org smashthestack.org
 127.0.0.1 github.com www.github.com
 EOF
-sudo tee -a /etc/hosts
+sudo tee -a /etc/hosts >/dev/null
 
 if uname | grep Darwin; then
     dscacheutil -flushcache
 fi
+
