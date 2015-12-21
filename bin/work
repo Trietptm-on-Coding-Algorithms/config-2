@@ -3,20 +3,14 @@
 exec 1>&- # close stdout
 
 # Turn off
-if grep reddit < /etc/hosts; then
-    echo 'Time to slack!' > /dev/stderr
-    sudo sed -E -i.bak '/\.(com|org|kr)/d' /etc/hosts
-else
-    echo 'Work work work!' > /dev/stderr
-    cat <<EOF |
+echo 'Work work work!' > /dev/stderr
+cat <<EOF |
 127.0.0.1 ssl.reddit.com reddit.com www.reddit.com slashdot.org youtube.com www.youtube.com  twitter.com www.twitter.com www.facebook
 127.0.0.1 amazon.com www.amazon.com
 127.0.0.1 pwnable.kr www.pwnable.kr io.smashthestack.org smashthestack.org
 127.0.0.1 github.com www.github.com
 EOF
 sudo tee -a /etc/hosts
-
-fi
 
 if uname | grep Darwin; then
     dscacheutil -flushcache
