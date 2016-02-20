@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # resume work-mode when this dies
-trap 'echo && work' 0
+trap 'echo && work ; sudo -k' 0
 sudo sed -E -i.bak '/\.(com|org|kr)/d' /etc/hosts
 
 if uname | grep Darwin; then
@@ -32,4 +32,7 @@ while true; do
 
     # No more than fifteen minutes at a time.
     [ $elapsed -gt $((15*60)) ] && break
+
+    # Keep sudo alive so it works in 'work'
+    sudo -v
 done
