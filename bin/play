@@ -1,18 +1,15 @@
 #!/bin/sh
 
-exec 1>&- # close stdout
-
 # resume work-mode when this dies
-trap 'echo; work' 0 > /dev/stderr
+trap 'echo && work' 0 > /dev/stderr
 
 sudo sed -E -i.bak '/\.(com|org|kr)/d' /etc/hosts
 
 if uname | grep Darwin; then
     dscacheutil -flushcache
-fi
+fi >/dev/null
 
-[ "$#" -ne 0 ] && echo "$@" > ~/.work_reason
-[ -f ~/.work_reason ] && (echo "You should be working on:" && cat ~/.work_reason) > /dev/stderr
+[ "$#" -ne 0 ] && echo "$@" >> ~/.work_reason
 
 function displaytime {
   local T=$1
@@ -24,12 +21,14 @@ function displaytime {
   (( $H > 0 )) && printf '%d hours ' $H
   (( $M > 0 )) && printf '%d minutes ' $M
   (( $D > 0 || $H > 0 || $M > 0 )) && printf 'and '
-  printf $'\r%d seconds' $S
+  printf $'%d seconds' $S
 }
 
 start=$SECONDS
 while true; do
     sleep 0.6
-    displaytime $(($SECONDS-$start)) > /dev/stderr
-done
+    elapsed=$(($SECONDS-$start))
+    printf $"\rYou should be working on: $(tail -n1 ~/.work_reason) ($(displaytime $elapsed))"
+    tput el
+done > /dev/stderr
 
