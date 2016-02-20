@@ -1,8 +1,7 @@
 #!/bin/sh
 
 # resume work-mode when this dies
-trap 'echo && work' 0 > /dev/stderr
-
+trap 'echo && work' 0
 sudo sed -E -i.bak '/\.(com|org|kr)/d' /etc/hosts
 
 if uname | grep Darwin; then
@@ -30,5 +29,7 @@ while true; do
     elapsed=$(($SECONDS-$start))
     printf $"\rYou should be working on: $(tail -n1 ~/.work_reason) ($(displaytime $elapsed))"
     tput el
-done > /dev/stderr
 
+    # No more than fifteen minutes at a time.
+    [ $elapsed -gt $((15*60)) ] && break
+done
