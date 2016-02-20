@@ -1,9 +1,7 @@
 #!/bin/sh
 
 exec 1>&- # close stdout
-
 # Turn off
-echo 'Work work work!' > /dev/stderr
 cat <<EOF |
 127.0.0.1 ssl.reddit.com reddit.com www.reddit.com
 127.0.0.1 slashdot.org www.slashdot.org
@@ -20,3 +18,5 @@ if uname | grep Darwin; then
     dscacheutil -flushcache
 fi
 
+[ "$#" -ne 0 ] && echo "$@" > ~/.work_reason
+[ -f ~/.work_reason ] && (echo "Working on:" && cat ~/.work_reason) > /dev/stderr

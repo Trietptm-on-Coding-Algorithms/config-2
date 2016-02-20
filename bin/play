@@ -2,9 +2,33 @@
 
 exec 1>&- # close stdout
 
-echo 'Time to slack!' > /dev/stderr
+# resume work-mode when this dies
+trap 'echo; work' 0 > /dev/stderr
+
 sudo sed -E -i.bak '/\.(com|org|kr)/d' /etc/hosts
 
 if uname | grep Darwin; then
     dscacheutil -flushcache
 fi
+
+[ -f ~/.work_reason ] && (echo "You should be working on:" && cat ~/.work_reason) > /dev/stderr
+
+function displaytime {
+  local T=$1
+  local D=$((T/60/60/24))
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+  (( $D > 0 )) && printf '%d days ' $D
+  (( $H > 0 )) && printf '%d hours ' $H
+  (( $M > 0 )) && printf '%d minutes ' $M
+  (( $D > 0 || $H > 0 || $M > 0 )) && printf 'and '
+  printf $'\r%d seconds' $S
+}
+
+start=$SECONDS
+while true; do
+    sleep 0.6
+    displaytime $(($SECONDS-$start)) > /dev/stderr
+done
+
