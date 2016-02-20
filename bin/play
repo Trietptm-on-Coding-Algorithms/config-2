@@ -11,6 +11,7 @@ if uname | grep Darwin; then
     dscacheutil -flushcache
 fi
 
+[ "$#" -ne 0 ] && echo "$@" > ~/.work_reason
 [ -f ~/.work_reason ] && (echo "You should be working on:" && cat ~/.work_reason) > /dev/stderr
 
 function displaytime {
