@@ -83,3 +83,10 @@
     fsckobjects = true
 [receive]
     fsckobjects = true
+[http]
+	cookiefile = /usr/local/google/home/riggle/.gitcookies
+[credential]
+	helper = corpsso
+[grep]
+	extendRegexp = true
+	lineNumber = true
