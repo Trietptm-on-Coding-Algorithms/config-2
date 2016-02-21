@@ -16,6 +16,7 @@
 	prune-all = !git-prune-all
 	ack = grep -E --break --heading --line-number --show-function
 	ag = grep -E --break --heading --line-number --show-function
+	wtf = wtf
 [branch]
 	autosetupmerge = true
 [push]
