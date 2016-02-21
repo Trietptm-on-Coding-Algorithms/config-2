@@ -1,9 +1,6 @@
 #!/bin/sh
 
-exec 1>&- # close stdout
-
 # Turn off
-echo 'Work work work!' > /dev/stderr
 cat <<EOF |
 127.0.0.1 ssl.reddit.com reddit.com www.reddit.com
 127.0.0.1 slashdot.org www.slashdot.org
@@ -18,5 +15,7 @@ sudo tee -a /etc/hosts >/dev/null
 
 if uname | grep Darwin; then
     dscacheutil -flushcache
-fi
+fi > /dev/null
 
+[ "$#" -ne 0 ] && echo "$@" >> ~/.work_reason
+echo "Now you're working on: $(tail -n1 ~/.work_reason)"
