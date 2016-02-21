@@ -77,13 +77,6 @@
 	folder = [Gmail]/Drafts
 	user = riggle@google.com
 	host = imaps://imap.gmail.com
-[http]
-	cookiefile = /usr/local/google/home/riggle/.gitcookies
-[credential]
-	helper = corpsso
-[grep]
-	extendRegexp = true
-	lineNumber = true
 [transfer]
     fsckobjects = true
 [fetch]
