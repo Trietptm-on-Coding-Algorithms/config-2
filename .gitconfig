@@ -14,6 +14,9 @@
 	up = pull
 	track = !git-track
 	prune-all = !git-prune-all
+	ack = grep -E --break --heading --line-number --show-function
+	ag = grep -E --break --heading --line-number --show-function
+	wtf = wtf
 [branch]
 	autosetupmerge = true
 [push]
@@ -80,3 +83,10 @@
     fsckobjects = true
 [receive]
     fsckobjects = true
+[http]
+	cookiefile = /usr/local/google/home/riggle/.gitcookies
+[credential]
+	helper = corpsso
+[grep]
+	extendRegexp = true
+	lineNumber = true

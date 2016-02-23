@@ -1,9 +1,12 @@
 #!/bin/sh
 
+pushd $(mktemp -d)
+
 apt-get build-dep linux-image-$(uname -r)
 apt-get source    linux-image-$(uname -r)
-pushd linux-*/
 make mandocs -j
-sudo make installmandocs
+sudo make installmandocs -j
+
+rm -rf "$PWD"
+
 popd
-rm -rf linux*

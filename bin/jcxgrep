@@ -12,6 +12,8 @@ noglob \
        -o -name '*.java'\
        -o -name '*.xml' \
        -o -name '*.aidl' \
+       -o -name '*.mk' \
+       -o -name '*.te' \
     \) \
     -print0 \
 | xargs -0 \
