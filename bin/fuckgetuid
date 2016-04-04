@@ -1,0 +1,2 @@
+#!/bin/sh
+sed -Ei '' 's|getuid|isnanl|' "$@"
