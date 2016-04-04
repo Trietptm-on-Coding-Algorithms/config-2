@@ -468,8 +468,8 @@ sudo apt-get install -qy binutils-{aarch64,alpha,arm,avr,cris,hppa,i386,ia64,m68
 git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 git clone git://github.com/jamis/rbenv-gemset.git     ~/.rbenv/plugins/rbenv-gemset
 PATH="$PATH:$PWD/.rbenv/shims:$PWD/.rbenv/bin"
-rbenv install        2.1.5
-rbenv gemset  create 2.1.5 gems
+rbenv install        2.3.0
+rbenv gemset  create 2.3.0 gems
 rbenv rehash
 
 gem install bundler
