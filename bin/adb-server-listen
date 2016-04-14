@@ -1,0 +1,8 @@
+#!/bin/sh
+exec 9<>/dev/null
+
+adb kill-server
+adb -a -P 5037 fork-server server --reply-fd 9 &>/dev/null &
+disown
+netstat -an | grep 5037
+adb get-state

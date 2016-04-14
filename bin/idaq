@@ -12,6 +12,12 @@ do
     exit
 done
 
+for dir in /Applications/IDA\ Pro\ *;
+do
+    open -a "$dir/$NAME.app" "$@"
+    exit
+done
+
 for dir in "$HOME/.wine/drive_c/Program Files (x86)/IDA"*;
 do
     wine "$dir/$NAME.exe" $* &
