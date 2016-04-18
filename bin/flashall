@@ -1,8 +1,12 @@
-#!/bin/bash
+#!/bin/bash -ex
 
-echo '$ adb reboot bootloader'
+adb wait-for-device
+
+adb reboot bootloader
 
 for image in *.img; do
     partition="${image%.*}"
     fastboot flash "$partition" "$image"
 done
+
+fastboot reboot
