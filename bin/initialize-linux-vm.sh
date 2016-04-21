@@ -107,12 +107,12 @@ install ack-grep
 install autoconf
 install binutils
 install build-essential
-install clang-3.5 || install clang
+install clang
 install cmake
 install curl
 install libc6:i386 || true
 install libc6-dbg:i386 || true
-install linux-libc-dev:i386
+install libc6-dev-i386
 install dissy
 install dpkg-dev
 install emacs
@@ -124,19 +124,25 @@ install gcc-arm-linux-gnueabihf || true
 install g++-arm-linux-gnueabihf || true
 install gcc-powerpc-linux-gnu || true
 install g++-powerpc-linux-gnu || true
+install gcc-powerpc64-linux-gnu || true
+install g++-powerpc64-linux-gnu || true
+install gcc-mips-linux-gnu || true
+install g++-mips-linux-gnu || true
+install gcc-mipsel-linux-gnu || true
+install g++-mipsel-linux-gnu || true
 install gdb
 install gdb-multiarch || true
 install git-core
 install htop || true
 install irssi
 install libbz2-dev
-install libc6-dev\*
+install libc6-dev
 install libexpat1-dev
 install libgdbm-dev
+install libglib2.0-dev # unicorn
 install libgmp-dev
 install liblzma-dev # binwalk
 install libncurses5-dev
-install libncursesw5-dev
 install libpcap0.8{,-dev}
 install libpng-dev
 install libpq-dev
@@ -145,12 +151,13 @@ install libreadline6-dev
 install libsqlite3-dev
 install libssl-dev
 install libssl0.9.8:i386 || true # IDA python
+install libssl1.0.0:i386 || true # IDA python
 install libtool
 install libxml2
 install libxml2-dev
 install libxslt1-dev
 install "linux-headers-$(uname -r)"
-install llvm-3.5 || install llvm
+install llvm
 install mercurial
 install nasm
 install netcat-traditional
@@ -164,7 +171,8 @@ install openssh-server
 install openvpn
 install patch
 install pwgen
-install qemu-system*  || true
+install qemu-system\*  || true
+install qemu-user
 install rar || true
 install realpath
 install silversearcher-ag || true
@@ -176,69 +184,10 @@ install tmux
 install tree
 install uncrustify
 install vim
-install xfce4-terminal || true
 install yodl
 install zlib1g-dev
 install zsh
 install unzip
-
-#
-# Enable installation of cross-build stuff from debian.
-#
-# We use old versions since it's the only thing that doesn't
-# end up having conflicts with modern Ubuntu.
-#
-sudo tee /etc/apt/sources.list.d/emdebian.list << EOF
-deb http://mirrors.mit.edu/debian squeeze main
-deb http://www.emdebian.org/debian squeeze main
-EOF
-
-sudo apt-get update
-
-install --force-yes gcc-4.4-mips-linux-gnu || true
-install --force-yes g++-4.4-mips-linux-gnu || true
-install --force-yes gcc-4.4-s390-linux-gnu || true
-install --force-yes g++-4.4-s390-linux-gnu || true
-install --force-yes gcc-4.4-sparc-linux-gnu || true
-install --force-yes g++-4.4-sparc-linux-gnu || true
-
-sudo rm -rf /etc/apt/sources.list.d/emdebian.list*
-sudo apt-get update
-
-sudo apt-get remove -yf apport
-
-#
-# Configure CC and CXX to be Clang by default.
-#
-# Also, configure 'clang' to even exist in the system path, as by
-# default it won't (as only e.g. clang-3.5 exists).
-#
-for version in 3.4 3.5 3.6;
-do
-    if hash clang-$version 2>/dev/null;
-    then
-        sudo update-alternatives --install "$(which c++)" c++ "$(which clang++-$version)" 30
-        sudo update-alternatives --install "$(which g++)" g++ "$(which clang++-$version)" 30
-
-        sudo update-alternatives --install "$(which cc)"  cc  "$(which clang-$version)"   30
-        sudo update-alternatives --install "$(which gcc)" gcc "$(which clang-$version)"   30
-
-        sudo update-alternatives --install /usr/bin/clang++ clang++ "$(which clang++-$version)" 30
-        sudo update-alternatives --install /usr/bin/clang   clang   "$(which clang-$version)"   30
-    fi
-done
-
-for version in 4.7 4.8 4.9;
-do
-    if hash gcc-$version 2>/dev/null;
-    then
-        sudo update-alternatives --install "$(which c++)" c++ "$(which g++-$version)" 20
-        sudo update-alternatives --install "$(which g++)" g++ "$(which g++-$version)" 20
-
-        sudo update-alternatives --install "$(which cc)"  cc  "$(which gcc-$version)"   20
-        sudo update-alternatives --install "$(which gcc)" gcc "$(which gcc-$version)"   20
-    fi
-done
 
 
 #
@@ -279,7 +228,8 @@ sudo sysctl --system || sudo service procps start
 #
 sudo update-alternatives --set nc /bin/nc.traditional
 
-apt-get source libc6 # for debugging libc
+# XXX: Fix this for 16.04
+# apt-get source libc6 # for debugging libc
 
 # GUI install?
 if dpkg -l xorg > /dev/null 2>&1; then
@@ -297,7 +247,7 @@ EOF
     # have an actual config file but uses gconf bullshit.
     wget -nc https://github.com/Anthony25/gnome-terminal-colors-solarized/archive/master.zip
     unzip master.zip
-    ~/gnome-terminal-colors-solarized-master/set_dark.sh
+    (echo 1; echo YES) | ~/gnome-terminal-colors-solarized-master/set_dark.sh
     rm -rf gnome-terminal-colors-solarized-master
 
     # Disable the login prompt when the screensaver pops
@@ -318,23 +268,23 @@ EOF
     # install rescuetime
     install network-manager-openvpn
 
-    wget -nc http://ftp.ussg.iu.edu/eclipse/technology/epp/downloads/release/luna/R/eclipse-cpp-luna-R-linux-gtk-x86_64.tar.gz
-    tar xzf eclipse*gz
+    wget -nc http://ftp.ussg.iu.edu/eclipse/technology/epp/downloads/release/mars/2/eclipse-cpp-mars-2-linux-gtk-x86_64.tar.gz
+    tar xf eclipse*gz
 
     # install eclipse # Don't install eclipse, since Ubuntu's is OLD
     sudo debconf-set-selections <<EOF
 ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true
 EOF
-    install wine1.7
+    install wine1.8 || install wine1.7
     install winetricks || true
-    wget -nc https://www.python.org/ftp/python/2.7.7/python-2.7.7.msi
-    wine msiexec /i python-2.7.7.msi /quiet  ALLUSERS=1
+    wget -nc https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi
+    wine msiexec /i python-2.7.11.msi /quiet  ALLUSERS=1
 
     gsettings set org.gnome.desktop.wm.preferences theme 'Greybird'
     gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Droid Sans 10'
 
     # wget -nc https://www.rescuetime.com/installers/rescuetime_current_$ARCH.deb
-    wget -nc http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_$ARCH.deb
+    wget -nc https://download.sublimetext.com/sublime-text_build-3103_amd64.deb
     wget -nc https://dl.google.com/linux/direct/google-chrome-stable_current_$ARCH.deb
 fi
 
@@ -416,6 +366,33 @@ git checkout -f master
 git reset -q --hard
 git submodule update -f -q --init --recursive
 
+
+#
+# Pwndbg stuff should get installed before pyenv
+#
+
+sudo apt-get install python-pip python3-pip
+git clone https://github.com/aquynh/capstone \
+        && cd capstone \
+        && git checkout -t origin/next \
+        && sudo ./make.sh install \
+        && cd bindings/python \
+        && sudo /usr/bin/python2 setup.py install \
+        && sudo /usr/bin/python3 setup.py install \
+        && cd $HOME
+
+git clone https://github.com/unicorn-engine/unicorn \
+        && cd unicorn \
+        && sudo ./make.sh install \
+        && cd bindings/python \
+        && sudo /usr/bin/python2 setup.py install \
+        && sudo /usr/bin/python3 setup.py install \
+        && cd $HOME
+
+git clone https://github.com/zachriggle/Pwndbg
+sudo /usr/bin/pip2 install -Ur requirements.txt
+sudo /usr/bin/pip3 install -Ur requirements.txt
+
 #
 # Force pyenv for this script
 #
@@ -457,9 +434,19 @@ cd ~
 #
 # Pwntools binary requirements
 #
-sudo add-apt-repository ppa:pwntools/binutils -y
-sudo apt-get update -qy
-sudo apt-get install -qy binutils-{aarch64,alpha,arm,avr,cris,hppa,i386,ia64,m68k,msp430,powerpc{,64},sparc{,64},vax,xscale}-linux-gnu
+# N.B. Xenial has all of these by default, yay!
+#
+install binutils-\*
+install libc6\*-cross
+
+sudo mkdir /etc/qemu-binfmt
+
+for arch in aarch64 mips mipsel mips64 mips64el powerpc powerpc64 powerpc64le s390x sparc64; do
+    sudo ln -sf /usr/$arch-linux-gnu /etc/qemu-binfmt/$arch
+done
+
+# Sigh
+sudo ln -sf /usr/arm-linux-gnueabihf /etc/qemu-binfmt/arm
 
 
 #
@@ -467,7 +454,7 @@ sudo apt-get install -qy binutils-{aarch64,alpha,arm,avr,cris,hppa,i386,ia64,m68
 #
 git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 git clone git://github.com/jamis/rbenv-gemset.git     ~/.rbenv/plugins/rbenv-gemset
-PATH="$PATH:$PWD/.rbenv/shims:$PWD/.rbenv/bin"
+PATH="$PATH:$HOME/.rbenv/shims:$HOME/.rbenv/bin"
 rbenv install        2.3.0
 rbenv gemset  create 2.3.0 gems
 rbenv rehash
@@ -498,22 +485,26 @@ sudo npm install -g completion
 # rm       ./metasploit-installer
 # sudo     update-rc.d metasploit disable
 # sudo     service metasploit stop
-cd ~
-wget -nc https://github.com/rapid7/metasploit-framework/archive/release.zip
-unzip release.zip
-cd metasploit-framework-*
-rm -f .ruby-version
-gem install bundler # metasploit has its own gemset
-bundle install
+if false; then
+    cd ~
+    wget -nc https://github.com/rapid7/metasploit-framework/archive/release.zip
+    unzip release.zip
+    cd metasploit-framework-*
+    rm -f .ruby-version
+    gem install bundler # metasploit has its own gemset
+    bundle install
+fi
 
 #
 # Set up binwalk
 #
-cd ~
-git clone git://github.com/devttys0/binwalk.git
-cd binwalk
-python setup.py install
-sudo rm -rf binwalk
+if false; then
+    cd ~
+    git clone git://github.com/devttys0/binwalk.git
+    cd binwalk
+    python setup.py install
+    sudo rm -rf binwalk
+fi
 
 #
 # Use zsh
