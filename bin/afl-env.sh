@@ -39,4 +39,4 @@ echo '$ export AFL_PATH="$HOME/afl"'
 echo '$ export AFL_USE_ASAN=1'
 echo '$ export AFL_HARDEN=1'
 echo '$ echo core | sudo tee /proc/sys/kernel/core_pattern'
-echo '$ echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+echo '$ echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
