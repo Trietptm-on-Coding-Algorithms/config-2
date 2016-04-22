@@ -1,0 +1,14 @@
+#!/bin/sh
+
+function pids() {
+    pgrep -d ' ' -i chrome || exit
+}
+
+if [ "$(pids)" != "" ]; then
+    kill -TERM $(pids)
+    sleep 3
+fi
+
+if [ "$(pids)" != "" ]; then
+    kill -KILL $(pids)
+fi
