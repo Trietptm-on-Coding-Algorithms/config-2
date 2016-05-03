@@ -428,7 +428,7 @@ git clone https://github.com/binjitsu/binjitsu
 cd ~/binjitsu
 bash .travis_install.sh
 bash .travis_ssh_setup.sh
-pip install -e .
+pip install --upgrade -e .
 cd ~
 
 #
