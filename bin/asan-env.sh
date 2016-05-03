@@ -12,7 +12,7 @@ export DEB_CXXFLAGS_APPEND="$CXXFLAGS"
 export DEB_LDFLAGS_APPEND="$LDFLAGS"
 
 # ASAN needs to know where llvm-symbolizer is
-for symbolizer in llvm-symbolizer{,-3.{6,5,4}};
+for symbolizer in llvm-symbolizer{,-3.{8,7,6,5,4}};
 do
 	> /dev/null 2>&1 which $symbolizer && export ASAN_SYMBOLIZER_PATH=$(which $symbolizer)
 done

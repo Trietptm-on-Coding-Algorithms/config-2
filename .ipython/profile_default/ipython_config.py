@@ -28,10 +28,6 @@ c = get_config()
 # c.InteractiveShellApp.exec_PYTHONSTARTUP = True
 
 # lines of code to run at IPython startup.
-c.InteractiveShellApp.exec_lines = ["""
-from pwn import *
-import os, re, sys, time, random, urllib, urllib2, datetime, itertools, subprocess, multiprocessing
-"""]
 c.InteractiveShell.confirm_exit = False
 c.PromptManager.in_template  = '>>> '
 c.PromptManager.in2_template = '..: '
@@ -40,8 +36,7 @@ c.InteractiveShell.separate_in = ''
 c.InteractiveShell.separate_out = ''
 c.InteractiveShell.separate_out2 = ''
 c.PromptManager.justify = False
-c.InteractiveShell.nosep = True
-c.InteractiveShell.display_banner = False
+c.TerminalIPythonApp.display_banner = False
 
 # Enable GUI event loop integration with any of ('glut', 'gtk', 'gtk3', 'none',
 # 'osx', 'pyglet', 'qt', 'qt4', 'tk', 'wx').

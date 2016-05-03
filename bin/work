@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# root crontab should look like
+# @hourly export HOME=~riggle; ~/bin/work
+# @reboot export HOME=~riggle; ~/bin/work
+
 # Turn off
 cat <<EOF |
 127.0.0.1 ssl.reddit.com reddit.com www.reddit.com
