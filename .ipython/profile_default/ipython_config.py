@@ -28,10 +28,6 @@ c = get_config()
 # c.InteractiveShellApp.exec_PYTHONSTARTUP = True
 
 # lines of code to run at IPython startup.
-c.InteractiveShellApp.exec_lines = ["""
-from pwn import *
-import os, re, sys, time, random, urllib, urllib2, datetime, itertools, subprocess, multiprocessing
-"""]
 c.InteractiveShell.confirm_exit = False
 c.PromptManager.in_template  = '>>> '
 c.PromptManager.in2_template = '..: '
