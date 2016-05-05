@@ -16,6 +16,9 @@ case $device in
         export CROSS_COMPILE=aarch64-linux-gnu-
         export ARCH=arm64
         ;;
+    *)
+        print Unknown branch.
+        exit
 esac
 
 echo make clean ${device}_defconfig cscope tags
