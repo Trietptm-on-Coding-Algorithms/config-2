@@ -1,0 +1,22 @@
+#!/bin/sh
+
+if ! git branch | grep android &>/dev/null; then
+    print Unknown branch.
+    exit
+fi
+
+device=$(git branch | grep '\*' | cut -d- -f3)
+
+case $device in
+    shamu|hammerhead)
+        export CROSS_COMPILE=arm-linux-gnueabihf-
+        export ARCH=arm
+        ;;
+    dragon|bullhead|angler)
+        export CROSS_COMPILE=aarch64-linux-gnu-
+        export ARCH=arm64
+        ;;
+esac
+
+echo make clean ${device}_defconfig cscope tags
+make clean ${device}_defconfig cscope tags
