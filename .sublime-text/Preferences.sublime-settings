@@ -13,10 +13,9 @@
 	"font_size": 10,
 	"ignored_packages":
 	[
-		"Vintage",
-		"Stylus",
 		"Markdown",
-		"Theme - Afterglow"
+		"Stylus",
+		"Vintage"
 	],
 	"scroll_speed": 0.0,
 	"theme": "Soda Dark 3.sublime-theme",
