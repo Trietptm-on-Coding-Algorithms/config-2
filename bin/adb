@@ -1,6 +1,6 @@
 #!/bin/sh
 if uname | grep -i darwin &>/dev/null; then
-  exec adb.darwin "$@"
+  exec -a adb adb.darwin "$@"
 else
-  exec adb.linux "$@"
+  exec -a adb adb.linux "$@"
 fi
