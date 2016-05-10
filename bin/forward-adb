@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ssh -o ExitOnForwardFailure=yes -f -n -N -T -R 5037:localhost:5037 "$@"
