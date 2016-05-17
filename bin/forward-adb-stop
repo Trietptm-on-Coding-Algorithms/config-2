@@ -1,4 +1,9 @@
-#!/bin/sh -ex
+#!/bin/sh
+
+if [ "$#" -eq "0" ]; then
+    echo "usage: $(basename $0) hostname"
+    exit
+fi
 
 # Stop forwarding
 ssh -T -N -o ExitOnForwardFailure=yes -O cancel -R 5037:localhost:5037 "$@"
