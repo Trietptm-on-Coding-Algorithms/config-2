@@ -1,3 +1,11 @@
-#!/bin/sh
+#!/bin/sh -ex
 
-ssh -o ExitOnForwardFailure=yes -f -n -N -T -R 5037:localhost:5037 "$@"
+# Establish a connection and start the control socket.
+ssh -T "$@" "exit"
+
+# Kill all instances of ADB running on the device.
+ssh -T -n "$@" "killall -9 adb adb.linux adb.darwin" || true
+
+# Start forwarding
+ssh -T -N -o ExitOnForwardFailure=yes -O forward -R 5037:localhost:5037 "$@"
+

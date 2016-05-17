@@ -1,0 +1,5 @@
+#!/bin/sh -ex
+
+# Stop forwarding
+ssh -T -N -o ExitOnForwardFailure=yes -O cancel -R 5037:localhost:5037 "$@"
+
