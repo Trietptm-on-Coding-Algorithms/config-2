@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if ! git branch | grep android &>/dev/null; then
-    print Unknown branch.
+    echo Unknown branch.
     exit
 fi
 
@@ -12,14 +12,14 @@ case $device in
         export CROSS_COMPILE=arm-linux-gnueabihf-
         export ARCH=arm
         ;;
-    dragon|bullhead|angler)
+    flounder|dragon|bullhead|angler|sailfish|marlin)
         export CROSS_COMPILE=aarch64-linux-gnu-
         export ARCH=arm64
         ;;
     *)
-        print Unknown branch.
+        echo Unknown branch.
         exit
 esac
 
-echo make clean ${device}_defconfig cscope tags
-make clean ${device}_defconfig cscope tags
+echo make clean ${device}_defconfig cscope tags "$@"
+make clean ${device}_defconfig cscope tags "$@"
