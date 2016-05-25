@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if uname | grep -i darwin &>/dev/null; then
   exec -a adb adb.darwin "$@"
 else
