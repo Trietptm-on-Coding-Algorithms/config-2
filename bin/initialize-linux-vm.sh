@@ -34,13 +34,16 @@ if [ ! -f "/etc/sudoers.d/$USER" ]; then
 sudo bash <<EOF
 umask 377
 echo "$USER ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/$USER
+
+if ! grep "includedir /etc/sudoers.d" /etc/sudoers; then
+    echo "#includedir /etc/sudoers.d" >> /etc/sudoers
+fi
 EOF
 fi
 
 #
 # Useful environment variables
 #
-
 case "$(uname -m)" in
     i686)   ARCH="i386" ;;
     x86_64) ARCH="amd64" ;;
@@ -48,6 +51,19 @@ esac
 
 DISTRO="$(lsb_release -is)"   # 'Ubuntu'
 RELEASE="$(lsb_release -cs)"  # 'trusty'
+
+#
+# Add source repositories so that we can:
+#
+# - apt-get source
+# - apt-get build-dep
+#
+sudo mv -n /etc/apt/sources.list{,.original}
+
+while read line; do
+    echo $line
+    echo $line | sed 's|deb |deb-src |'
+done < /etc/apt/sources.list.original | sudo tee /etc/apt/sources.list
 
 #
 # Default mirrors are sloooooooow
@@ -58,10 +74,7 @@ RELEASE="$(lsb_release -cs)"  # 'trusty'
 #
 slow="(ftp|https?)://.*/(ubuntu|debian)"
 fast="\1://mirrors.mit.edu/\2"
-sudo mv -n /etc/apt/sources.list{,.original}
-sudo cp    /etc/apt/sources.list{.original,}
 sudo sed -i -E "s $slow $fast i" /etc/apt/sources.list
-
 
 #
 # Get around proxy filtering for external repos
@@ -189,6 +202,9 @@ install zlib1g-dev
 install zsh
 install unzip
 
+# Other things which may be missing, if this is e.g. a minimal install.
+install tasksel
+sudo tasksel install server
 
 #
 # Configure automatic updates
@@ -485,6 +501,22 @@ if false; then
     cd binwalk
     python setup.py install
     sudo rm -rf binwalk
+fi
+
+#
+# Update TMUX
+#
+TMUXVER=2.2
+if ! tmux -v | grep $TMUXVER &>/dev/null; then
+    sudo apt-get build-dep tmux
+    wget https://github.com/tmux/tmux/releases/download/$TMUXVER/tmux-$TMUXVER.tar.gz
+    tar xf tmux-$TMUXVER.tar.gz
+    pushd tmux-$TMUXVER
+    ./configure
+    make -j$(nproc)
+    sudo make install
+    popd
+    rm -rf tmux*
 fi
 
 #
