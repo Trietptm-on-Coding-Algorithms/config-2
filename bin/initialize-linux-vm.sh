@@ -367,31 +367,12 @@ git reset -q --hard
 git submodule update -f -q --init --recursive
 
 
-#
 # Pwndbg stuff should get installed before pyenv
-#
-
 sudo apt-get install python-pip python3-pip
-git clone https://github.com/aquynh/capstone \
-        && cd capstone \
-        && git checkout -t origin/next \
-        && sudo ./make.sh install \
-        && cd bindings/python \
-        && sudo /usr/bin/python2 setup.py install \
-        && sudo /usr/bin/python3 setup.py install \
-        && cd $HOME
-
-git clone https://github.com/unicorn-engine/unicorn \
-        && cd unicorn \
-        && sudo ./make.sh install \
-        && cd bindings/python \
-        && sudo /usr/bin/python2 setup.py install \
-        && sudo /usr/bin/python3 setup.py install \
-        && cd $HOME
-
 git clone https://github.com/zachriggle/Pwndbg
-sudo /usr/bin/pip2 install -Ur requirements.txt
-sudo /usr/bin/pip3 install -Ur requirements.txt
+pushd ~/pwndbg
+bash setup.sh
+popd
 
 #
 # Force pyenv for this script
