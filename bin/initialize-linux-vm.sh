@@ -468,6 +468,7 @@ rbenv rehash
 sudo ln -s $(which nodejs) /usr/bin/node
 sudo npm install -g workit
 sudo npm install -g completion
+sudo npm install -g git-travis
 
 #
 # Set up metasploit
