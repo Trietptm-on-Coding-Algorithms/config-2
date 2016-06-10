@@ -385,9 +385,9 @@ git submodule update -f -q --init --recursive
 
 # Pwndbg stuff should get installed before pyenv
 sudo apt-get install python-pip python3-pip
-git clone https://github.com/zachriggle/Pwndbg
+git clone https://github.com/pwndbg/pwndbg
 pushd ~/pwndbg
-bash setup.sh
+sudo bash ./setup.sh
 popd
 
 #
