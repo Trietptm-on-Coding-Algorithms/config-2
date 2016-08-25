@@ -23,5 +23,7 @@ esac
 
 [ -d .git ] && git clean -xdf
 
-echo make clean ${device}_defconfig cscope tags "$@"
-make clean ${device}_defconfig cscope tags "$@"
+make clean
+make ${device}_defconfig 
+make tags
+make cscope
