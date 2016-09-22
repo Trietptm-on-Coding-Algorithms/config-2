@@ -20,7 +20,7 @@
 [branch]
 	autosetupmerge = true
 [push]
-	default = tracking
+	default = current
 [color]
 	ui = auto
 	branch = auto
