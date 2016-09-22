@@ -2,7 +2,7 @@
 
 # resume work-mode when this dies
 trap 'echo && work ; sudo -k' 0
-sudo sed -E -i.bak '/\.(com|org|kr)/d' /etc/hosts
+sudo sed -E -i.bak '/\.(com|org|kr|su)/d' /etc/hosts
 
 if uname | grep Darwin; then
     dscacheutil -flushcache
@@ -30,8 +30,8 @@ while true; do
     printf $"\rYou should be working on: $(tail -n1 ~/.work_reason) ($(displaytime $elapsed))"
     tput el
 
-    # No more than fifteen minutes at a time.
-    [ $elapsed -gt $((15*60)) ] && break
+    # No more than FIVE minutes at a time.
+    [ $elapsed -gt $((5*60)) ] && break
 
     # Keep sudo alive so it works in 'work'
     sudo -v
