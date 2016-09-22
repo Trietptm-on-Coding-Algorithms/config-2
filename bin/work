@@ -6,12 +6,19 @@
 
 # Turn off
 cat <<EOF |
-127.0.0.1 ssl.reddit.com reddit.com www.reddit.com
-127.0.0.1 slashdot.org www.slashdot.org
-127.0.0.1 youtube.com www.youtube.com
-127.0.0.1 twitter.com www.twitter.com
-127.0.0.1 facebook.com www.facebook.com
-127.0.0.1 pwnable.kr www.pwnable.kr io.smashthestack.org smashthestack.org
+127.0.0.1 reddit.com            www.reddit.com ssl.reddit.com
+127.0.0.1 slashdot.org          www.slashdot.org
+127.0.0.1 youtube.com           www.youtube.com
+127.0.0.1 twitter.com           www.twitter.com
+127.0.0.1 facebook.com          www.facebook.com
+127.0.0.1 amazon.com            www.amazon.com
+127.0.0.1 pwnable.kr            www.pwnable.kr
+127.0.0.1 smashthestack.org     io.smashthestack.org
+127.0.0.1 dpreview.com          www.dpreview.com
+127.0.0.1 slrgear.com           www.slrgear.com
+127.0.0.1 imaging-resource.com  www.imaging-resource.com
+127.0.0.1 43rumors.com          www.43rumors.com
+
 EOF
 sudo tee -a /etc/hosts >/dev/null
 
