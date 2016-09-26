@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # resume work-mode when this dies
-trap 'echo && work ; sudo -k' 0
 sudo sed -E -i.bak '/\.(com|org|kr|su)/d' /etc/hosts
+trap 'echo ; work ; sudo -k; exit' 0 SIGSTOP SIGTSTP SIGTRAP SIGPIPE
 
 if uname | grep Darwin; then
     dscacheutil -flushcache
