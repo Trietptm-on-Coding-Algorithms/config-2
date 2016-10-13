@@ -8,3 +8,6 @@ fi
 # Stop forwarding
 ssh -T -N -o ExitOnForwardFailure=yes -O cancel -R 5037:localhost:5037 "$@"
 ssh -T -N -o ExitOnForwardFailure=yes -O cancel -L 5037:localhost:5037 "$@"
+
+# Display devices
+adb devices -l

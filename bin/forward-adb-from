@@ -14,3 +14,5 @@ killall -9 adb adb.linux adb.darwin
 # Start forwarding
 ssh -T -N -o ExitOnForwardFailure=yes -O forward -L 5037:localhost:5037 "$@"
 
+# Show devices
+adb devices -l
