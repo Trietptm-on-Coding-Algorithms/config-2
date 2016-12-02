@@ -507,7 +507,7 @@ fi
 #
 # Update TMUX
 #
-TMUXVER=2.2
+TMUXVER=2.3
 if ! tmux -v | grep $TMUXVER &>/dev/null; then
     sudo apt-get build-dep tmux
     wget https://github.com/tmux/tmux/releases/download/$TMUXVER/tmux-$TMUXVER.tar.gz
