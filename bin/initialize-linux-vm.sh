@@ -452,8 +452,8 @@ sudo ln -sf /usr/arm-linux-gnueabihf /etc/qemu-binfmt/arm
 git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 git clone git://github.com/jamis/rbenv-gemset.git     ~/.rbenv/plugins/rbenv-gemset
 PATH="$PATH:$HOME/.rbenv/shims:$HOME/.rbenv/bin"
-rbenv install        2.3.0
-rbenv gemset  create 2.3.0 gems
+rbenv install        2.3.1
+rbenv gemset  create 2.3.1 gems
 rbenv rehash
 
 gem install bundler
