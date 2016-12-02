@@ -274,7 +274,7 @@ EOF
     dconf write /org/compiz/profiles/unity/plugins/unityshell/shortcut-overlay false
 
     sudo add-apt-repository ppa:ubuntu-wine/ppa -y
-    sudo apt-get update -qq
+    sudo apt-get update -qq || true
 
     install compiz
     install compiz-plugins
