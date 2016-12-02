@@ -305,7 +305,7 @@ EOF
 fi
 
 sudo dpkg --install ./*.deb || true
-sudo apt-get install -f --yes
+install -f --yes
 
 sudo apt-get -f    --silent install
 sudo apt-get --yes --silent autoremove
@@ -384,7 +384,7 @@ git submodule update -f -q --init --recursive
 
 
 # Pwndbg stuff should get installed before pyenv
-sudo apt-get install python-pip python3-pip
+install python-pip python3-pip
 git clone https://github.com/pwndbg/pwndbg
 pushd ~/pwndbg
 sudo bash ./setup.sh
