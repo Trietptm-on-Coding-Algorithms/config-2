@@ -421,10 +421,10 @@ pip_install ipython
 pip_install hub
 pip_install git-up
 
-git clone https://github.com/binjitsu/binjitsu
-cd ~/binjitsu
-bash .travis_install.sh
-bash .travis_ssh_setup.sh
+git clone https://github.com/Gallopsled/pwntools
+cd ~/pwntools
+bash travis/install.sh
+bash travis/ssh_setup.sh
 pip install --upgrade -e .
 cd ~
 
