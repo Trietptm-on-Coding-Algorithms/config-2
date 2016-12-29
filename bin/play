@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # resume work-mode when this dies
-sudo sed -E -i.bak '/\.(com|org|kr|su)/d' /etc/hosts
+sudo sed -E -i.bak '/(.*# work)|(^\s*$)/d' /etc/hosts
 trap 'echo ; work ; sudo -k; exit' 0 SIGSTOP SIGTSTP SIGTRAP SIGPIPE
 
 if uname | grep Darwin; then
@@ -22,6 +22,8 @@ function displaytime {
   (( $D > 0 || $H > 0 || $M > 0 )) && printf 'and '
   printf $'%d seconds' $S
 }
+
+SNIPPETS='/google/data/ro/projects/contentads/adx/verification/tools/snippets'
 
 start=$SECONDS
 while true; do

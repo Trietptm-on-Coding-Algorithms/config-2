@@ -8,9 +8,11 @@ fi
 # Establish a connection and start the control socket.
 ssh -T "$@" "exit"
 
-# Kill all instances of ADB running locally.
+# Kill all instances of ADB running on the device.
 killall -9 adb adb.linux adb.darwin
 
 # Start forwarding
 ssh -T -N -o ExitOnForwardFailure=yes -O forward -L 5037:localhost:5037 "$@"
 
+# Show devices
+adb devices -l
