@@ -274,7 +274,7 @@ EOF
     dconf write /org/compiz/profiles/unity/plugins/unityshell/shortcut-overlay false
 
     sudo add-apt-repository ppa:ubuntu-wine/ppa -y
-    sudo apt-get update -qq
+    sudo apt-get update -qq || true
 
     install compiz
     install compiz-plugins
@@ -305,7 +305,7 @@ EOF
 fi
 
 sudo dpkg --install ./*.deb || true
-sudo apt-get install -f --yes
+install -f --yes
 
 sudo apt-get -f    --silent install
 sudo apt-get --yes --silent autoremove
@@ -384,7 +384,7 @@ git submodule update -f -q --init --recursive
 
 
 # Pwndbg stuff should get installed before pyenv
-sudo apt-get install python-pip python3-pip
+install python-pip python3-pip
 git clone https://github.com/pwndbg/pwndbg
 pushd ~/pwndbg
 sudo bash ./setup.sh
@@ -421,10 +421,10 @@ pip_install ipython
 pip_install hub
 pip_install git-up
 
-git clone https://github.com/binjitsu/binjitsu
-cd ~/binjitsu
-bash .travis_install.sh
-bash .travis_ssh_setup.sh
+git clone https://github.com/Gallopsled/pwntools
+cd ~/pwntools
+bash travis/install.sh
+bash travis/ssh_setup.sh
 pip install --upgrade -e .
 cd ~
 
@@ -452,8 +452,8 @@ sudo ln -sf /usr/arm-linux-gnueabihf /etc/qemu-binfmt/arm
 git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 git clone git://github.com/jamis/rbenv-gemset.git     ~/.rbenv/plugins/rbenv-gemset
 PATH="$PATH:$HOME/.rbenv/shims:$HOME/.rbenv/bin"
-rbenv install        2.3.0
-rbenv gemset  create 2.3.0 gems
+rbenv install        2.3.1
+rbenv gemset  create 2.3.1 gems
 rbenv rehash
 
 gem install bundler
@@ -507,7 +507,7 @@ fi
 #
 # Update TMUX
 #
-TMUXVER=2.2
+TMUXVER=2.3
 if ! tmux -v | grep $TMUXVER &>/dev/null; then
     sudo apt-get build-dep tmux
     wget https://github.com/tmux/tmux/releases/download/$TMUXVER/tmux-$TMUXVER.tar.gz
