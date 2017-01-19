@@ -29,14 +29,37 @@ c = get_config()
 
 # lines of code to run at IPython startup.
 c.InteractiveShell.confirm_exit = False
-c.PromptManager.in_template  = '>>> '
-c.PromptManager.in2_template = '..: '
-c.PromptManager.out_template = ''
 c.InteractiveShell.separate_in = ''
 c.InteractiveShell.separate_out = ''
 c.InteractiveShell.separate_out2 = ''
-c.PromptManager.justify = False
+
+# c.PromptManager.in_template  = '>>> '
+# c.PromptManager.in2_template = '..: '
+# c.PromptManager.out_template = ''
+# c.PromptManager.justify = False
+
 c.TerminalIPythonApp.display_banner = False
+
+from IPython.terminal.prompts import Prompts, Token
+
+class ClassicPrompts(Prompts):
+    def in_prompt_tokens(self, cli=None):
+        return [
+            (Token.Prompt, '>>> '),
+        ]
+
+    def continuation_prompt_tokens(self, cli=None, width=None):
+        return [
+            (Token.Prompt, '... ')
+        ]
+
+    def rewrite_prompt_tokens(self):
+        return []
+
+    def out_prompt_tokens(self):
+        return []
+
+c.TerminalInteractiveShell.prompts_class = ClassicPrompts
 
 # Enable GUI event loop integration with any of ('glut', 'gtk', 'gtk3', 'none',
 # 'osx', 'pyglet', 'qt', 'qt4', 'tk', 'wx').
