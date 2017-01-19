@@ -1,2 +1,8 @@
 #!/bin/sh
+
+if [[ "$#" < 1 ]]; then
+    echo "Usage: $(basename $0) <hostname> <args...>"
+    exit 1
+fi
+
 ssh "$@" -t 'tmux -vvv -2 -CC attach || tmux -vvv -2 -CC'
