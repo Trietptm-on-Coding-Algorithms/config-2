@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 set -ex
 
-VERSION=7.11
+VERSION=7.12
 
 sudo apt-get build-dep gdb
 
