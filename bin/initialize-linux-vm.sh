@@ -273,9 +273,6 @@ EOF
     gsettings set org.gnome.Terminal.Legacy.Settings confirm-close false || true
     dconf write /org/compiz/profiles/unity/plugins/unityshell/shortcut-overlay false
 
-    sudo add-apt-repository ppa:ubuntu-wine/ppa -y
-    sudo apt-get update -qq || true
-
     install compiz
     install compiz-plugins
     install compizconfig-settings-manager
