@@ -8,3 +8,4 @@ set convert-meta off
 
 "\eOC": forward-word
 "\eOD": backward-word
+set horizontal-scroll-mode off # https://twitter.com/trufae
