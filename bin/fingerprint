@@ -1,0 +1,2 @@
+#!/bin/sh
+adb shell getprop ro.build.fingerprint

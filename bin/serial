@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ -z "$ANDROID_SERIAL" ]; then
+    adb shell getprop ro.serialno
+else
+    echo "$ANDROID_SERIAL"
+fi
