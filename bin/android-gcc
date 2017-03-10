@@ -1,11 +1,32 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 OS=$(uname)
 OS=${OS,,}
 
-export NDK=$HOME/Downloads/android-ndk-r10e
-export SYSROOT=$NDK/platforms/android-21/arch-arm
-export CC="$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/$OS-x86_64/bin/arm-linux-androideabi-gcc-4.9 --sysroot=$SYSROOT"
+# The last/most recent version of the NDK should be used.
+if [ -z "$NDK" ]; then
+for ndk in $HOME/Downloads/android-ndk*/; do
+    export NDK="$ndk"
+done &>/dev/null
+fi
+
+# Which build chain to use is determined by the currently-selected device
+for sysroot in $NDK/platforms/android-2*/; do
+    export SYSROOT="$sysroot"
+done
+
+# Determine which GCC to use
+for bin in "$NDK/toolchains/arm-linux-android*/prebuilt/$OS-*/bin"; do
+    export BIN="$bin"
+done
+
+# Find the specific gcc binary
+for gcc in "$BIN/*-gcc"; do
+    export CC="$gcc"
+done
+
+export PATH="$BIN:$PATH"
+export CFLAGS="--sysroot=$SYSROOT"
 
 set -ex
-$CC "$@"
+$CC "$CFLAGS" "$@"
