@@ -7,7 +7,9 @@
 	"installed_packages":
 	[
 		"AlignTab",
+		"AutoPEP8",
 		"Clang Format",
+		"Cscope",
 		"DocBlockr",
 		"GitGutter",
 		"Jade",

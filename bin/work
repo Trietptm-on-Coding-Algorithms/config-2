@@ -1,32 +1,14 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
+mapfile -t hosts < ~/.work_hosts
 # root crontab should look like
 # @hourly export HOME=~riggle; ~/bin/work
 # @reboot export HOME=~riggle; ~/bin/work
 
-hosts=( reddit.com
-        ssl.reddit.com
-        slashdot.org
-        twitter.com
-        facebook.com
-        amazon.com
-        pwnable.kr
-        smashthestack.org
-        dpreview.com
-        slrgear.com
-        imaging-resource.com
-        43rumors.com
-        ebay.com
-        netflix.com
-        imgur.com
-        twitch.tv
-        youtube.com
-        ycombinator.com
-        news.ycombinator.com
-)
 
 for host in ${hosts[@]}; do
-    echo "127.0.0.1 $host www.$host # work"
+    if ! grep "$host" /etc/hosts &>/dev/null; then
+        echo "127.0.0.1 $host www.$host ssl.$host # work"
+    fi
 done \
 | sudo tee -a /etc/hosts >/dev/null
 

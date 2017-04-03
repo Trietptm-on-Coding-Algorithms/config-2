@@ -1,6 +1,5 @@
 #!/bin/bash
 
-exec &>/dev/null
 shopt -s nullglob
 
 NAME=$(basename $0)
@@ -14,15 +13,13 @@ done
 
 for dir in /Applications/IDA\ Pro\ *;
 do
-    open -a "$dir/$NAME.app" "$@"
-    exit
+    "$dir/$NAME.app/Contents/MacOS/$NAME" "$@" &
+    disown
 done
 
 for dir in "$HOME/.wine/drive_c/Program Files (x86)/IDA"*;
 do
     wine "$dir/$NAME.exe" $* &
     disown
-    exit
 done
 
-echo "No IDA :("
