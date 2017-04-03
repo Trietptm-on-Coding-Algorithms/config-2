@@ -1,0 +1,2 @@
+#!/bin/sh
+exec ssh workstation -t 'tmux -2 -CC attach'

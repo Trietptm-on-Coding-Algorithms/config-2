@@ -1,0 +1,39 @@
+#!/bin/sh
+
+if [ $1 != '' ]; then
+    BRANCH=$(git for-each-ref --sort=-committerdate --format='%(refname)' | grep hammerhead | head -1)
+    if [ "$BRANCH" = '' ]; then
+        echo "Couldn't find a branch for $1"
+        exit
+    fi
+    if ! git checkout $BRANCH; then
+        echo "Checkout failed, aborting"
+        exit
+    fi
+fi
+
+if ! git branch | grep android &>/dev/null; then
+    echo Unknown branch.
+    exit
+fi
+
+device=$(git branch | grep '\*' | cut -d- -f3)
+
+case $device in
+    shamu|hammerhead)
+        export CROSS_COMPILE=arm-linux-gnueabihf-
+        export ARCH=arm
+        ;;
+    flounder|dragon|bullhead|angler|sailfish|marlin)
+        export CROSS_COMPILE=aarch64-linux-gnu-
+        export ARCH=arm64
+        ;;
+    *)
+        echo Unknown branch.
+        exit
+esac
+
+[ -d .git ] && git clean -xdf
+
+echo make clean ${device}_defconfig cscope tags "$@"
+make clean ${device}_defconfig cscope tags "$@"

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Restart ADB as non-root
+# adb shell 'setprop service.adb.root 0; setprop ctl.restart adbd'
+
+# Wait for adb
+adb wait-for-device
+
+# Disable enforcing mode
+adb shell 'su root setenforce 0'
+
+# Restore enforcing mode after a timeout
+(sleep 5; adb shell 'su root setenforce 1') &
+
+# Get our shell
+if [ "$#" -eq 0 ]; then
+    (echo 'exec runcon u:r:debuggerd:s0 su 10000,10000,10000 sh'; cat ) | adb shell
+else
+    adb shell "exec runcon u:r:debuggerd:s0 $@"
+fi
+
