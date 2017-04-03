@@ -207,6 +207,13 @@ install tasksel
 sudo tasksel install server
 
 #
+# Source URIs for goobuntu
+#
+if which goobuntu-config; then
+    sudo goobuntu-config set include_deb_src true
+fi
+
+#
 # Configure automatic updates
 #
 # Automation
@@ -505,7 +512,7 @@ fi
 # Update TMUX
 #
 TMUXVER=2.3
-if ! tmux -v | grep $TMUXVER &>/dev/null; then
+if ! tmux -V | grep $TMUXVER &>/dev/null; then
     sudo apt-get build-dep tmux
     wget https://github.com/tmux/tmux/releases/download/$TMUXVER/tmux-$TMUXVER.tar.gz
     tar xf tmux-$TMUXVER.tar.gz
